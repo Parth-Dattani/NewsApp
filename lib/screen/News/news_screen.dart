@@ -21,7 +21,7 @@ class NewsScreen extends GetView<NewsController> {
           leadingOnTap: () {},
           leadingWidth: 150,
           iconSize: 4.5,
-          actionIcon: ImagePath.notificationIcon,
+          actionIcon: [ImagePath.notificationIcon],
         ),
         body: SafeArea(
           child: Padding(

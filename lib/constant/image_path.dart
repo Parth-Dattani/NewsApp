@@ -13,4 +13,6 @@ mixin ImagePath {
   static String profileIcon = 'assets/images/profile.png';
   static String filterIcon = 'assets/images/filter.png';
   static String bbcNewsIcon = 'assets/images/bbc.png';
+  static String shareIcon = 'assets/images/share.png';
+  static String commentIcon = 'assets/images/comment.png';
 }

@@ -1,0 +1,129 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:news_app/controller/controller.dart';
+
+import '../../constant/constant.dart';
+import '../../widgets/widgets.dart';
+
+class DetailScreen extends GetView<DetailController>{
+  static const pageId = "/DetailScreen";
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: ColorsConfig.colorWhite,
+      appBar: CommonAppBar(
+        leadingIcon: ImagePath.arrowBack,
+        actionIcon: [Icons.share],
+      ),
+    body: SafeArea(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CircleAvatar(minRadius: 20,
+                    backgroundImage: AssetImage(ImagePath.bbcNewsIcon,),),
+                  SizedBox(width: 5,),
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(controller.byLine.value, style: CustomTextStyle.appBarText,
+                        overflow: TextOverflow.clip,
+                          maxLines: 2,
+                        ),
+                        Text(
+                          DateFormat('dd-MM-yyyy').format(DateTime.parse(controller.publishedDate.value))
+                          , style: CustomTextStyle.hintTextStyle,),
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
+                  CommonButton(
+                    name: 'following'.tr,
+                    color: ColorsConfig.colorBlue,
+                    textStyle: CustomTextStyle.buttonStyle,
+                    borderRadius: 6,
+                    border: false,
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    onPress: () {
+                      FocusScope.of(context).unfocus();
+
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(height: 15,),
+              Container(
+                height: Get.height*0.4,width: Get.width* 0.90,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                        image: NetworkImage(controller.image.value, scale: 15),
+                        fit: BoxFit.fill
+                    )
+                ),
+                //child:
+              ),
+              const SizedBox(height: 20,),
+              Text(controller.section.value,
+                style: CustomTextStyle.hintTextStyle,),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                controller.title.value,
+                style: CustomTextStyle.headLineStyle,
+              ),
+
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                controller.abstract.value,
+                style: CustomTextStyle.newsHeadLineText,
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+      bottomNavigationBar: Container(
+        height: Get.height * 0.1,
+        decoration: const BoxDecoration(
+          color: ColorsConfig.colorWhite,
+          border: Border(
+              top: BorderSide(color: ColorsConfig.colorLightGrey, width: 1)),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.05),
+              blurRadius: 4,
+              offset: Offset(0.0, -2),
+            )
+          ],
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
+        child: Row(
+          children: [
+            const Icon(Icons.favorite, color: ColorsConfig.colorPink),
+            const SizedBox(width: 5,),
+            Text("24.k", style: CustomTextStyle.newsHeadLineText,),
+            const SizedBox(width: 30,),
+            Image.asset(ImagePath.commentIcon, scale: 20,),
+            const SizedBox(width: 5,),
+            Text("1K", style: CustomTextStyle.newsHeadLineText,),
+            const Spacer(),
+           const Icon(Icons.bookmark, color: ColorsConfig.colorBlue,)
+          ],
+        ),
+      ),
+    );
+  }
+
+}

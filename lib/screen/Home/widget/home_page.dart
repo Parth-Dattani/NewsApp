@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:news_app/screen/Detail/detail_screen.dart';
 import 'package:news_app/screen/News/news_screen.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../../constant/constant.dart';
 import '../../../controller/home_controller.dart';
 import '../../../widgets/widgets.dart';
@@ -11,14 +14,14 @@ class HomePageWidget extends StatelessWidget {
 
   static final controller = Get.find<HomeController>();
 
-  HomePageWidget({Key? key, required this.searchController}) : super(key: key);
+  const HomePageWidget({Key? key, required this.searchController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 25, right: 25, top: 40, bottom: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CommonTextField(
             controller: searchController,
@@ -62,7 +65,7 @@ class HomePageWidget extends StatelessWidget {
             height: 20,
           ),
           Container(
-            height: 400,
+            height: Get.height*0.4,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               border: Border.all(color: ColorsConfig.colorLightGray),
@@ -73,21 +76,27 @@ class HomePageWidget extends StatelessWidget {
                   offset: Offset(0.0, -2),
                 )
               ],
+                image: DecorationImage(
+                    image: NetworkImage(
+                        controller.resultDataList[0].multimedia![0].url.toString()
+                    ),
+                    fit: BoxFit.fill
+                )
             ),
-            child: Image.asset(ImagePath.appLogo),
+
           ),
           const SizedBox(
             height: 15,
           ),
           Text(
-            "europe".tr,
+            controller.resultDataList[0].section.toString(),
             style: CustomTextStyle.timeStyle,
           ),
           const SizedBox(
             height: 5,
           ),
           Text(
-            "Russian warship: Moskva sinks in Black Sea".tr,
+            controller.resultDataList[0].title.toString(),
             style: CustomTextStyle.newsHeadLineText,
           ),
           const SizedBox(
@@ -96,31 +105,44 @@ class HomePageWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  CircleAvatar(
-                    child: Image.asset(ImagePath.bbcNewsIcon),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    "bbc_news".tr,
-                    style: CustomTextStyle.timeStyle,
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  const Icon(Icons.access_time_rounded),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  const Text("4h ago"),
-                ],
+              Expanded(
+                child: Row(
+                  children: [
+                    CircleAvatar(minRadius: 15,
+                      backgroundImage: AssetImage(ImagePath.bbcNewsIcon,),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: Text(
+                        controller.resultDataList[0].orgFacet!.isNotEmpty
+                            ? controller.resultDataList[0].orgFacet!.first.toString()
+                            : '',
+                        style: CustomTextStyle.timeStyle,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    const Icon(Icons.access_time_rounded),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      DateFormat('dd-MM-yyyy').format(DateTime.parse(controller.resultDataList[0].publishedDate.toString()))
+                      , style: CustomTextStyle.timeStyle,),
+                  ],
+                ),
               ),
-              const Icon(
-                Icons.more_horiz,
-                color: ColorsConfig.colorGray,
+              IconButton(
+                icon: const Icon(Icons.more_horiz, color: ColorsConfig.colorGray,),
+                onPressed: (){
+                  debugPrint("Share Link : ${controller.resultDataList[0].url.toString()}");
+                  Share.share(controller.resultDataList[0].url.toString(), subject: "Today's News");
+                },
               )
             ],
           ),
@@ -148,46 +170,52 @@ class HomePageWidget extends StatelessWidget {
           const SizedBox(
             height: 25,
           ),
-          Obx(
-            () => Expanded(
-                child: controller.resultDataList.isNotEmpty
-                    ?
-                      ListView.separated(
-                        itemCount: 10,
-                        itemBuilder: (context, index) {
-                          return NewsListWidget(
-                            section: controller.resultDataList[index].section
-                                .toString(),
-                            title: controller.resultDataList[index].title
-                                .toString(),
-                            byLine: controller.resultDataList[index].orgFacet!.isNotEmpty
-                                ? controller
-                                        .resultDataList[index].orgFacet!.first
-                                        .toString()
+          // Obx(
+          //   () => controller.resultDataList.isNotEmpty
+          //       ?
+                  ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: 10,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: (){
+                          debugPrint("dfkdshf : ${controller.resultDataList[index].section.toString()}");
+                          Get.toNamed(DetailScreen.pageId,
+                          arguments: {
+                            'section': controller.resultDataList[index].section.toString(),
+                            'title': controller.resultDataList[index].title.toString(),
+                            'byLine' : controller.resultDataList[index].orgFacet!.isNotEmpty
+                                ? controller.resultDataList[index].orgFacet!.first.toString()
                                 : '',
-                            publishedDate: controller
-                                .resultDataList[index].publishedDate
-                                .toString(),
-                            newsLink:
-                                controller.resultDataList[index].url.toString(),
-                            image: controller.resultDataList[index].multimedia!.isNotEmpty
-                                ? controller
-                                .resultDataList[index].multimedia![0].url.toString()
-                                : '',
-                          );
+                            'publishedDate': controller.resultDataList[index].publishedDate.toString(),
+                            'image' :controller.resultDataList[index].multimedia![0].url.toString(),
+                            'abstract' :controller.resultDataList[index].abstract.toString()
+                          });
                         },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return Container(height: 35.0);
-                        })
-                    : const Center(child: CircularProgressIndicator())),
-          )
+                        child: NewsListWidget(
+                          section: controller.resultDataList[index].section.toString(),
+                          title: controller.resultDataList[index].title.toString(),
+                          byLine: controller.resultDataList[index].orgFacet!.isNotEmpty
+                              ? controller.resultDataList[index].orgFacet!.first.toString()
+                              : '',
+                          publishedDate: controller.resultDataList[index].publishedDate.toString(),
+                          newsLink:
+                              controller.resultDataList[index].url.toString(),
+                          image: controller.resultDataList[index].multimedia!.isNotEmpty
+                              ? controller
+                              .resultDataList[index].multimedia![0].url.toString()
+                              : '',
+                        ),
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return Container(height: 35.0);
+                    })
+          //       : const Center(child: CircularProgressIndicator()),
+          // )
         ],
       ),
     );
   }
 }
-
-// @override
-// Widget homePage({required TextEditingController searchController}) {
-//
-// }

@@ -68,6 +68,7 @@ class Language extends Translations {
           "go_to_homepage" : "Go to Homepage",
           "congratulations" : "Congratulations!",
           "your_account_is_ready_to_use" : "Your account is ready to use",
+          "following" : "Following",
         }
       };
 }

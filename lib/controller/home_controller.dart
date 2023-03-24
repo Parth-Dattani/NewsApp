@@ -12,6 +12,7 @@ class HomeController extends BaseController{
   final TextEditingController searchController = TextEditingController();
 
   RxList<Results> resultDataList = <Results>[].obs;
+  RxList<NewsResponse> newsResponse = <NewsResponse>[].obs;
 
   @override
   void onInit() {
@@ -24,24 +25,32 @@ class HomeController extends BaseController{
       loader.value = true;
       var response = await RemoteServices.getNews();
       if (response.statusCode == 200) {
+
         var jsonData = json.decode(response.body);
 
-        //newsResponse.value =  NewsResponse.fromJson(jsonData);
+        //newsResponse.value =  NewsResponse.fromJson(jsonData) as List<NewsResponse>;
 
-        var data = jsonData['results'];
-        if (data.isNotEmpty) {
-          loader.value = false;
-          for (var i in data) {
-            resultDataList.add(Results.fromJson(i));
+        // if(jsonData.isNotEmpty){
+        //   loader.value = false;
+          var data = jsonData['results'];
+          if (data.isNotEmpty) {
+            //loader.value = false;
+            for (var i in data) {
+              resultDataList.add(Results.fromJson(i));
+            }
+            //newsResponse.value = NewsResponse.fromJson(jsonData as Map<String, dynamic>);
+            debugPrint("List : ${resultDataList[0].section}");
+            loader.value = false;
+          } else {
+            loader.value = false;
           }
-          //newsResponse.value = NewsResponse.fromJson(jsonData as Map<String, dynamic>);
-          debugPrint("List : ${resultDataList[0].section}");
-          loader.value = false;
-        } else {
-          loader.value = false;
         }
-      }
+        // else {
+        //   loader.value = false;
+        // }
+      //}
     } catch (e) {
+
       debugPrint("Error :- ${e.toString()}");
     }
   }

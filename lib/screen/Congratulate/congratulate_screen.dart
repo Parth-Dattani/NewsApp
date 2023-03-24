@@ -34,16 +34,15 @@ class CongratulateScreen extends GetView<CongratulateController>{
         ),
       ),
       bottomNavigationBar: Container(
-        height: Get.height * 0.11,
+        height: Get.height * 0.12,
         decoration: const BoxDecoration(
           color: ColorsConfig.colorWhite,
         ),
-        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 25),
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
         child: CommonButton(
           name: 'go_to_homepage'.tr,
           color: ColorsConfig.colorBlue,
           textStyle: CustomTextStyle.buttonStyle,
-          minWidth: 200,
           borderRadius: 6,
           border: false,
           onPress: () {

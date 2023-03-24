@@ -193,4 +193,12 @@ class CustomTextStyle {
     fontWeight: FontWeight.w400,
     letterSpacing: AppTextStyle.letterSpacing3,
   );
+
+  static TextStyle headLineStyle = const TextStyle(
+      color: ColorsConfig.colorBlack,
+      fontFamily: AppTextStyle.poppinsBold,
+      fontSize: AppTextStyle.textFontSize24,
+      fontWeight: FontWeight.w400,
+      letterSpacing: AppTextStyle.letterSpacing
+  );
 }

@@ -7,3 +7,6 @@ export 'Topic/topic_screen.dart';
 export 'Home/home_screen.dart';
 export 'News/news_screen.dart';
 export 'Congratulate/congratulate_screen.dart';
+export 'Detail/detail_screen.dart';
+export 'Explore/explore_screen.dart';
+export 'Bookmark/bookmark_screen.dart';

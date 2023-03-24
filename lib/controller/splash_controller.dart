@@ -21,7 +21,7 @@ class SplashController extends BaseController {
     switch (
     await sharedPreferencesHelper.retrievePrefBoolData('isLogin')) {
       case true:
-        return Get.offAndToNamed(CountryScreen.pageId);
+        return Get.offAndToNamed(HomeScreen.pageId);
       case false:
         return Get.offAndToNamed(LoginScreen.pageId);
     }

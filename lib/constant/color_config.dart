@@ -12,6 +12,7 @@ class ColorsConfig {
   static const Color colorDarkGray = Color(0xFFB0B3B8);
   static const Color colorLightGray = Color(0xFFEEF1F4);
   static const Color colorRed = Color(0xFFC30052);
+  static const Color colorPink = Color(0xFFED2E7E);
   static const Color colorLightBlue = Color(0xFF5890FF);
   static const Color colorMixGray = Color(0xFF667080);
   static const Color colorLightRed = Color(0xFFFFF3F8);

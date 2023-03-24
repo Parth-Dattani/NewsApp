@@ -10,7 +10,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget{
   final String? titleIcon;
   final VoidCallback? leadingOnTap;
   final String Function(String)? onChange;
-  final String? actionIcon;
+  final List? actionIcon;
   final VoidCallback? actionOnTap;
 
   const CommonAppBar({
@@ -46,6 +46,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget{
             : Container(),
       ),
       leadingWidth: leadingWidth,
+
       actions: [
         GestureDetector(
           onTap: actionOnTap ?? (){
