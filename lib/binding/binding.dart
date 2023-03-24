@@ -1,0 +1,9 @@
+export 'onboard_binding.dart';
+export 'splash_binding.dart';
+export 'login_binding.dart';
+export 'signup_binding.dart';
+export 'country_binding.dart';
+export 'topic_binding.dart';
+export 'home_binding.dart';
+export 'news_binding.dart';
+export 'congratulate_binding.dart';
