@@ -70,6 +70,9 @@ class Language extends Translations {
           "your_account_is_ready_to_use" : "Your account is ready to use",
           "following" : "Following",
           "topic" : "Topic",
+          "save" : "Save",
+          "saved" : "Saved",
+          "popular_topic" : "Popular Topic",
         }
       };
 }

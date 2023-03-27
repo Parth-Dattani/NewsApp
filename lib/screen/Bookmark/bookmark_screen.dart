@@ -58,7 +58,7 @@ class BookMarkScreen extends GetView<BookMarkController> {
                 () => ListView.separated(
                     shrinkWrap: true,
                     itemCount: controller.bookMarkdList.length,
-                    physics: const BouncingScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {

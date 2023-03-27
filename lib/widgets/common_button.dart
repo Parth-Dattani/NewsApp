@@ -7,6 +7,7 @@ class CommonButton extends StatelessWidget {
   final String? name;
   final Color? color;
   final Color? iconColor;
+  final Color? borderColor;
   final TextStyle? textStyle;
   final double? minWidth;
   final VoidCallback? onPress;
@@ -32,6 +33,7 @@ class CommonButton extends StatelessWidget {
         //this.icon,
         this.image,
         this.scale,
+        this.borderColor,
         this.iconColor, this.height, this.width})
       : super(key: key);
 
@@ -45,7 +47,7 @@ class CommonButton extends StatelessWidget {
       padding: padding ?? EdgeInsets.zero,
       shape: RoundedRectangleBorder(
         side: border!
-            ?  BorderSide(color: ColorsConfig.colorBlack)
+            ?  BorderSide(color: borderColor ?? ColorsConfig.colorBlack)
             : BorderSide.none,
         borderRadius: BorderRadius.circular(borderRadius!),
       ),
