@@ -171,6 +171,7 @@ class DetailScreen extends GetView<DetailController> {
                       print("bookMark : ${jsonEncode(controller.bookMarkdList)}");
 
 
+
                       controller.bookMarkdList.add(Results(
                         section: controller.section.value,
                         title: controller.title.value,
