@@ -69,6 +69,7 @@ class Language extends Translations {
           "congratulations" : "Congratulations!",
           "your_account_is_ready_to_use" : "Your account is ready to use",
           "following" : "Following",
+          "topic" : "Topic",
         }
       };
 }

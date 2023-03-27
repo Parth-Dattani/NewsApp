@@ -201,4 +201,12 @@ class CustomTextStyle {
       fontWeight: FontWeight.w400,
       letterSpacing: AppTextStyle.letterSpacing
   );
+
+  static TextStyle titleHeadStyle = const TextStyle(
+    color: ColorsConfig.colorBlack,
+    fontFamily: AppTextStyle.poppinsBold,
+    fontSize: AppTextStyle.textFontSize32,
+    fontWeight: FontWeight.w700,
+    letterSpacing: AppTextStyle.letterSpacing,
+  );
 }
