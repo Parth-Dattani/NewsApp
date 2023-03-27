@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../constant/constant.dart';
 
-Widget bottomNavBar({required int index}) {
+Widget bottomNavBar({ tabIndex,  changeTabIndex}) {
   return BottomNavigationBar(
     type: BottomNavigationBarType.fixed,
-    currentIndex: index,
+    currentIndex: tabIndex,
     backgroundColor: ColorsConfig.colorWhite,
     selectedItemColor: ColorsConfig.colorBlue,
     unselectedItemColor: ColorsConfig.colorBlack,
     selectedFontSize: 14,
     unselectedFontSize: 14,
     elevation: 25,
-    onTap: (value) {
-      index = value;
-      debugPrint("object : $index");
-    },
+    onTap:       changeTabIndex,
+    // onTap: (value) {
+    //   tabIndex = value;
+    //   debugPrint("object : $tabIndex");
+    // },
     items: [
       BottomNavigationBarItem(
         label: 'home'.tr,
@@ -24,7 +25,7 @@ Widget bottomNavBar({required int index}) {
           child: Image.asset(
             ImagePath.homeIcon,
             scale: 25,
-            color: index == 0 ? ColorsConfig.colorBlue : ColorsConfig.colorGray,
+            color: tabIndex == 0 ? ColorsConfig.colorBlue : ColorsConfig.colorGray,
           ),
         ),
       ),
@@ -35,7 +36,7 @@ Widget bottomNavBar({required int index}) {
           child: Image.asset(
             ImagePath.exploreIcon,
             scale: 25,
-            color: index == 1 ? ColorsConfig.colorBlue : ColorsConfig.colorGray,
+            color: tabIndex == 1 ? ColorsConfig.colorBlue : ColorsConfig.colorGray,
           ),
         ),
       ),
@@ -46,7 +47,7 @@ Widget bottomNavBar({required int index}) {
           child: Image.asset(
             ImagePath.bookMarkIcon,
             scale: 30,
-            color: index == 2 ? ColorsConfig.colorBlue : ColorsConfig.colorGray,
+            color: tabIndex == 2 ? ColorsConfig.colorBlue : ColorsConfig.colorGray,
           ),
         ),
       ),
@@ -57,7 +58,7 @@ Widget bottomNavBar({required int index}) {
           child: Image.asset(
             ImagePath.profileIcon,
             scale: 25,
-            color: index == 3 ? ColorsConfig.colorBlue : ColorsConfig.colorGray,
+            color: tabIndex == 3 ? ColorsConfig.colorBlue : ColorsConfig.colorGray,
           ),
         ),
       ),

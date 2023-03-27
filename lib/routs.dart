@@ -53,7 +53,7 @@ final List<GetPage> appPage = [
       binding: ExploreBinding()),
   GetPage(
       name: BookMarkScreen.pageId,
-      page: () =>  BookMarkScreen(),
+      page: () =>  const BookMarkScreen(),
       binding: BookMarkBinding()),
 
 ];

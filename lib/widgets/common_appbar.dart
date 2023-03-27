@@ -5,6 +5,7 @@ import '../constant/constant.dart';
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget{
   final String? leadingIcon;
   final double? iconSize;
+  final double? actionIconSize;
   final double? leadingWidth;
   final String? title;
   final String? titleIcon;
@@ -17,6 +18,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget{
     Key? key,
     this.leadingIcon,
     this.iconSize,
+    this.actionIconSize,
     this.title,
     this.titleIcon,
     this.leadingOnTap,
@@ -54,7 +56,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget{
           },
           child: actionIcon != null
               ?
-       Image.asset(ImagePath.notificationIcon, scale: iconSize ??  25.0,) :Container(),
+       Image.asset(ImagePath.notificationIcon, scale: actionIconSize ??  25.0,) :Container(),
         )
       ],
     );

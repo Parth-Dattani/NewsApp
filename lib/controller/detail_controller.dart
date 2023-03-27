@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/base_controller.dart';
+import 'package:news_app/model/model.dart';
 
 class DetailController extends BaseController{
 
@@ -10,6 +11,9 @@ class DetailController extends BaseController{
   RxString publishedDate = ''.obs;
   RxString image = ''.obs;
   RxString abstract = ''.obs;
+  RxBool isBookMark = false.obs;
+  RxList<Results> bookMarkdList = <Results>[].obs;
+  RxList bookd = [].obs;
 
   @override
   void onInit() {
@@ -21,5 +25,16 @@ class DetailController extends BaseController{
     image.value = Get.arguments['image'].toString();
     abstract.value = Get.arguments['abstract'].toString();
     debugPrint("abstract : ${abstract.value}");
+  }
+
+  void data(){
+    Results r = Results(
+        section: section.value,
+        title:   title.value,
+        byline: byLine.value,
+        createdDate: publishedDate.value,
+        url: image.value,
+        abstract: abstract.value,
+        );
   }
 }

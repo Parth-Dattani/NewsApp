@@ -6,13 +6,16 @@ import 'package:news_app/controller/base_controller.dart';
 
 import '../model/model.dart';
 import '../services/services.dart';
+import '../utils/utils.dart';
 
 class HomeController extends BaseController{
-  RxInt currentIndex = 0.obs;
+  //RxInt currentIndex = 0.obs;
+  var tabIndex = 0.obs;
   final TextEditingController searchController = TextEditingController();
 
   RxList<Results> resultDataList = <Results>[].obs;
   RxList<NewsResponse> newsResponse = <NewsResponse>[].obs;
+  RxList<Results> bookMarkdList = <Results>[].obs;
 
   @override
   void onInit() {
@@ -20,8 +23,23 @@ class HomeController extends BaseController{
     super.onInit();
   }
 
+  //bottom NavBar Index
+  void changeTabIndex(int index) {
+    tabIndex.value = index;
+  }
+
+  // void bookMarkNews()async{
+  //   var result = await sharedPreferencesHelper.retrievePrefData("bookmark_news");
+  //   var list = jsonDecode(result);
+  //   print("list : $list");
+  //   list.map((e) => bookMarkdList.add(Results.fromJson(e))).toList();
+  //   print("book length : ${bookMarkdList.length}");
+  //   print("bookMark : ${jsonEncode(bookMarkdList)}");
+  // }
+
+
   void getNews() async {
-    try {
+    // try {
       loader.value = true;
       var response = await RemoteServices.getNews();
       if (response.statusCode == 200) {
@@ -30,15 +48,12 @@ class HomeController extends BaseController{
 
         //newsResponse.value =  NewsResponse.fromJson(jsonData) as List<NewsResponse>;
 
-        // if(jsonData.isNotEmpty){
-        //   loader.value = false;
           var data = jsonData['results'];
           if (data.isNotEmpty) {
             //loader.value = false;
             for (var i in data) {
               resultDataList.add(Results.fromJson(i));
             }
-            //newsResponse.value = NewsResponse.fromJson(jsonData as Map<String, dynamic>);
             debugPrint("List : ${resultDataList[0].section}");
             loader.value = false;
           } else {
@@ -49,9 +64,9 @@ class HomeController extends BaseController{
         //   loader.value = false;
         // }
       //}
-    } catch (e) {
-
-      debugPrint("Error :- ${e.toString()}");
-    }
+    // } catch (e) {
+    //
+    //   debugPrint("Error :- ${e.toString()}");
+    // }
   }
 }

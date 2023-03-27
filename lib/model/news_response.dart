@@ -56,10 +56,10 @@ class Results {
   String? publishedDate;
   String? materialTypeFacet;
   String? kicker;
-  List<String>? desFacet;
-  List<String>? orgFacet;
-  List<String>? perFacet;
-  List<String>? geoFacet;
+  dynamic desFacet;
+  dynamic orgFacet;
+  dynamic perFacet;
+  dynamic geoFacet;
   List<Multimedia>? multimedia;
   String? shortUrl;
 
@@ -98,10 +98,10 @@ class Results {
     publishedDate = json['published_date'];
     materialTypeFacet = json['material_type_facet'];
     kicker = json['kicker'];
-    desFacet = json['des_facet'].cast<String>();
-    orgFacet = json['org_facet'].cast<String>();
-    perFacet = json['per_facet'].cast<String>();
-    geoFacet = json['geo_facet'].cast<String>();
+    desFacet = json['des_facet'];
+    orgFacet = json['org_facet'];
+    perFacet = json['per_facet'];
+    geoFacet = json['geo_facet'];
     if (json['multimedia'] != null) {
       multimedia = <Multimedia>[];
       json['multimedia'].forEach((v) {

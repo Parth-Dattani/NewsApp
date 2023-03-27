@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
+import 'package:news_app/model/model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -25,6 +27,9 @@ class SharedPreferencesHelper {
     await prefs!.setStringList(key, res);
   }
 
+  Future storePrefDataListResult(String key, List<String> res) async {
+    await prefs!.setStringList(key, res);
+  }
 
   // retrieve string preference data
   Future<String> retrievePrefData(String key) async {

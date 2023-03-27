@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:news_app/constant/constant.dart';
 import 'package:news_app/controller/controller.dart';
@@ -50,7 +49,7 @@ class LoginScreen extends GetView<LoginController>{
                                         borderRadius: 6,
                                         suffixIcon: IconButton(
                                           //icon: controller.errorSuffix.value ==  ? Icon(Icons.close) : Icons(Icons.abc),
-                                          icon: controller.emailFIllColor.value ? IconButton(icon: Icon(Icons.close),onPressed: (){
+                                          icon: controller.emailFIllColor.value ? IconButton(icon: const Icon(Icons.close),onPressed: (){
                                           },)
                                               : Container(),
                                           onPressed: (){},
