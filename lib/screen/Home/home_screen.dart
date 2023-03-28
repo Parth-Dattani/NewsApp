@@ -17,30 +17,25 @@ class HomeScreen extends GetView<HomeController>{
     return Obx(
       ()=> CommonLoader(
         isLoad: controller.loader.value,
-        body: WillPopScope(
-          onWillPop: ()async{
-            return Common().willPopCallback(context);
-          },
-          child: Scaffold(
-            backgroundColor: ColorsConfig.colorWhite,
-            body: SafeArea(
-              child: Obx(
-                ()=> IndexedStack(
-                  sizing: StackFit.expand,
-                  index: controller.tabIndex.value,
-                  children: [
-                   controller.resultDataList.isNotEmpty ?
-                   HomePageWidget(searchController: controller.searchController) : Container(),
-                    const ExploreScreen(),
-                    const BookMarkScreen(),
-                    Container(child: Text("${controller.tabIndex.value+1}"),) ,
-                  ],
-                ),
+        body: Scaffold(
+          backgroundColor: ColorsConfig.colorWhite,
+          body: SafeArea(
+            child: Obx(
+              ()=> IndexedStack(
+                sizing: StackFit.expand,
+                index: controller.tabIndex.value,
+                children: [
+                 controller.resultDataList.isNotEmpty ?
+                 HomePageWidget(searchController: controller.searchController) : Container(),
+                  const ExploreScreen(),
+                  const BookMarkScreen(),
+                  Container(child: Text("${controller.tabIndex.value+1}"),) ,
+                ],
               ),
             ),
-            bottomNavigationBar :
-            Obx(()=> bottomNavBar(tabIndex: controller.tabIndex.value,changeTabIndex: controller.changeTabIndex))
           ),
+          bottomNavigationBar :
+          Obx(()=> bottomNavBar(tabIndex: controller.tabIndex.value,changeTabIndex: controller.changeTabIndex))
         ),
       ),
     );

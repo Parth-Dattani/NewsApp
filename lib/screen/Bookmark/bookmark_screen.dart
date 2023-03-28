@@ -7,6 +7,7 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../constant/constant.dart';
 import '../../widgets/widgets.dart';
+import '../screen.dart';
 
 class BookMarkScreen extends GetView<BookMarkController> {
   static const pageId = '/BookMarkScreen';
@@ -65,20 +66,21 @@ class BookMarkScreen extends GetView<BookMarkController> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            debugPrint("dfkdshf : ${controller.bookMarkdList[index].section.toString()}");
                             print("dfkdshf : ${controller.bookMarkdList[index].section.toString()}");
-                            print("dfkdshf : ");
-                            // Get.toNamed(DetailScreen.pageId,
-                            //     arguments: {
-                            //       'section': controller.resultDataList[index].section.toString(),
-                            //       'title': controller.resultDataList[index].title.toString(),
-                            //       'byLine' : controller.resultDataList[index].orgFacet!.isNotEmpty
-                            //           ? controller.resultDataList[index].orgFacet!.first.toString()
-                            //           : '',
-                            //       'publishedDate': controller.resultDataList[index].publishedDate.toString(),
-                            //       'image' :controller.resultDataList[index].multimedia![0].url.toString(),
-                            //       'abstract' :controller.resultDataList[index].abstract.toString()
-                            //     });
+                            Get.toNamed(DetailScreen.pageId,
+                                arguments: {
+                                  'section': controller.bookMarkdList[index].section.toString(),
+                                  'title': controller.bookMarkdList[index].title.toString(),
+                                  'byLine' : controller.bookMarkdList[index].orgFacet != null
+                                      ? controller.bookMarkdList[index].orgFacet!.first.toString()
+                                      : '',
+                                  'publishedDate': controller.bookMarkdList[index].publishedDate.toString(),
+                                  'image' :controller.bookMarkdList[index].multimedia != null ?
+                                  controller.bookMarkdList[index].multimedia![0].url
+                                      .toString() : '',
+                                  'abstract' :controller.bookMarkdList[index].abstract.toString()
+                                });
+
                           },
                           child: NewsListWidget(
                             section: controller.bookMarkdList[index].section

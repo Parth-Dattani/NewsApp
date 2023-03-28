@@ -42,5 +42,4 @@ class DetailController extends BaseController{
     debugPrint("book length : ${bookMarkdList.length}");
     debugPrint("bookMark : ${jsonEncode(bookMarkdList)}");
   }
-
 }

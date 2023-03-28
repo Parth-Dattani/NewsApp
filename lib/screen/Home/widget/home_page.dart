@@ -24,7 +24,11 @@ class HomePageWidget extends StatelessWidget {
         leadingIcon: ImagePath.appLogo,
         leadingWidth: 150,
         iconSize: 4.5,
-        actionIcon: [ImagePath.notificationIcon],
+        actionIconSize: 4.5,
+        actionIcon: Image.asset(ImagePath.notificationIcon),
+        actionOnTap: (){
+          print("action tap 1");
+        },
       ),
       body:  Padding(
         padding: const EdgeInsets.only(left: 25, right: 25, top: 40, bottom: 16),
@@ -199,7 +203,10 @@ class HomePageWidget extends StatelessWidget {
                                   ? controller.resultDataList[index].orgFacet!.first.toString()
                                   : '',
                               'publishedDate': controller.resultDataList[index].publishedDate.toString(),
-                              'image' :controller.resultDataList[index].multimedia![0].url.toString(),
+                              //'image' :controller.resultDataList[index].multimedia![0].url.toString(),
+                              'image' :controller.resultDataList[index].multimedia != null ?
+                              controller.resultDataList[index].multimedia![0].url
+                                  .toString() : '',
                               'abstract' :controller.resultDataList[index].abstract.toString()
                             });
                           },

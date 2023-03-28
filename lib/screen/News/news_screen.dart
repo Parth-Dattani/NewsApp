@@ -4,6 +4,7 @@ import 'package:news_app/screen/Home/widget/news_list_widget.dart';
 import '../../constant/constant.dart';
 import '../../controller/controller.dart';
 import '../../widgets/widgets.dart';
+import '../screen.dart';
 
 class NewsScreen extends GetView<NewsController> {
   static const pageId = "/NewsScreen";
@@ -21,7 +22,7 @@ class NewsScreen extends GetView<NewsController> {
           leadingOnTap: () {},
           leadingWidth: 150,
           iconSize: 4.5,
-          actionIcon: [ImagePath.notificationIcon],
+          actionIcon: Image.asset(ImagePath.notificationIcon),
         ),
         body: SafeArea(
           child: Padding(
@@ -42,7 +43,7 @@ class NewsScreen extends GetView<NewsController> {
                         style: CustomTextStyle.labelStyle,
                       ),
                       onPressed: () {
-                        Get.toNamed(NewsScreen.pageId);
+                        //Get.toNamed(NewsScreen.pageId);
                       },
                     )
                   ],
@@ -61,9 +62,7 @@ class NewsScreen extends GetView<NewsController> {
                       indicatorSize: TabBarIndicatorSize.label,
                       unselectedLabelColor: ColorsConfig.colorBlack,
                       onTap: (e){
-                        print("Taped Item Name :${controller.tabList[e]}");
                         controller.category = controller.tabList[e];
-                        print("object cate : ${controller.category}");
                         controller.categoryNews(controller.category);
                       },
                       tabs: List.generate(
@@ -93,22 +92,40 @@ class NewsScreen extends GetView<NewsController> {
                                 ()=> ListView.separated(
                                     itemCount: controller.resultDataList.length,
                                     itemBuilder: (context, index) {
-                                      return NewsListWidget(
-                                        section: controller.resultDataList[index].section.toString(),
-                                        title: controller.resultDataList[index].title.toString(),
-                                        byLine: controller.resultDataList[index].orgFacet!.isNotEmpty
-                                            ? controller
-                                            .resultDataList[index].orgFacet!.first
-                                            .toString()
-                                            : '',
-                                        newsLink : controller.resultDataList[index].url.toString(),
-                                        publishedDate:
-                                        controller.resultDataList[index].publishedDate.toString(),
-                                        image: controller.resultDataList[index].multimedia != null
-                                            ? controller
-                                            .resultDataList[index].multimedia![0].url
-                                            .toString()
-                                            : '',
+                                      return GestureDetector(
+                                        onTap: (){
+                                          Get.toNamed(DetailScreen.pageId,
+                                              arguments: {
+                                                'section': controller.resultDataList[index].section.toString(),
+                                                'title': controller.resultDataList[index].title.toString(),
+                                                'byLine' : controller.resultDataList[index].orgFacet != null
+                                                    ? controller.resultDataList[index].orgFacet![0].toString()
+                                                    : '',
+                                                'publishedDate': controller.resultDataList[index].publishedDate.toString(),
+                                                'image' :controller.resultDataList[index].multimedia != null ?
+                                                controller.resultDataList[index].multimedia![0].url
+                                                    .toString() : '',
+                                                'abstract' :controller.resultDataList[index].abstract.toString()
+                                              });
+
+                                        },
+                                        child: NewsListWidget(
+                                          section: controller.resultDataList[index].section.toString(),
+                                          title: controller.resultDataList[index].title.toString(),
+                                          byLine: controller.resultDataList[index].orgFacet!.isNotEmpty
+                                              ? controller
+                                              .resultDataList[index].orgFacet!.first
+                                              .toString()
+                                              : '',
+                                          newsLink : controller.resultDataList[index].url.toString(),
+                                          publishedDate:
+                                          controller.resultDataList[index].publishedDate.toString(),
+                                          image: controller.resultDataList[index].multimedia != null
+                                              ? controller
+                                              .resultDataList[index].multimedia![0].url
+                                              .toString()
+                                              : '',
+                                        ),
                                       );
                                     },
                                     separatorBuilder: (BuildContext context, int index) {

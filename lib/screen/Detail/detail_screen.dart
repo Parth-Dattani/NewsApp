@@ -22,8 +22,14 @@ class DetailScreen extends GetView<DetailController> {
         backgroundColor: ColorsConfig.colorWhite,
         appBar: CommonAppBar(
           leadingIcon: ImagePath.arrowBack,
-          actionIcon: [Icons.share, 12],
-          actionIconSize: 2,
+          actionIcon: Image.asset(ImagePath.shareIcon, scale: 25,),
+          //actionIconSize: 130.5,
+          //actionIconSize2: 30.5,
+          secondVisible: true,
+          actionIcon2: Image.asset(ImagePath.shareIcon,scale:25 ),
+          actionOnTap: (){},
+          actionOnTap2: (){
+          },
         ),
         body: SafeArea(
           child: SingleChildScrollView(
