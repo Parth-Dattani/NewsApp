@@ -160,17 +160,10 @@ class DetailScreen extends GetView<DetailController> {
                       debugPrint("isBookMark : ${controller.isBookMark.value}");
                       controller.isBookMark.value = !controller.isBookMark.value;
                       debugPrint("isBookMark : ${controller.isBookMark.value}");
-                      // sharedPreferencesHelper.storeBoolPrefData("isBookMark" , controller.isBookMark.value);
                       // sharedPreferencesHelper.storePrefData("bookmark_news" , controller.title.value);
-                      var result = await sharedPreferencesHelper.retrievePrefData("bookmark_news");
-                      var list = jsonDecode(result);
-                      print("list : $list");
-                      print("listlength : ${list.length}");
-                      list.map((e) => controller.bookMarkdList.add(Results.fromJson(e))).toList();
-                      print("book length : ${controller.bookMarkdList.length}");
-                      print("bookMark : ${jsonEncode(controller.bookMarkdList)}");
 
 
+                    controller.retriveData();
 
                       controller.bookMarkdList.add(Results(
                         section: controller.section.value,

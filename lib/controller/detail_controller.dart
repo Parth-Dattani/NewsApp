@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/base_controller.dart';
 import 'package:news_app/model/model.dart';
+
+import '../utils/shared_preferences_helper.dart';
 
 class DetailController extends BaseController{
 
@@ -15,7 +19,7 @@ class DetailController extends BaseController{
   RxList<Results> bookMarkdList = <Results>[].obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
     section.value = Get.arguments['section'].toString();
     title.value = Get.arguments['title'].toString();
@@ -24,6 +28,19 @@ class DetailController extends BaseController{
     image.value = Get.arguments['image'].toString();
     abstract.value = Get.arguments['abstract'].toString();
     debugPrint("abstract : ${abstract.value}");
+
+    retriveData();
+  }
+
+  //get sharedPreference Data
+  Future<void> retriveData() async {
+    var result = await sharedPreferencesHelper.retrievePrefData("bookmark_news");
+    var list = jsonDecode(result);
+    debugPrint("list : $list");
+    debugPrint("listlength : ${list.length}");
+    list.map((e) => bookMarkdList.add(Results.fromJson(e))).toList();
+    debugPrint("book length : ${bookMarkdList.length}");
+    debugPrint("bookMark : ${jsonEncode(bookMarkdList)}");
   }
 
 }
