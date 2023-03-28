@@ -73,6 +73,7 @@ class Language extends Translations {
           "save" : "Save",
           "saved" : "Saved",
           "popular_topic" : "Popular Topic",
+          "publish_date" : "Publish Date",
         }
       };
 }

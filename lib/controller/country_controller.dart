@@ -20,10 +20,14 @@ class CountryController extends BaseController {
   Rx<String> query = "".obs;
   final auth = FirebaseAuth.instance;
   get user => auth.currentUser;
+  QuerySnapshot? dataStream;
+  RxList<UserResponse> userData = <UserResponse>[].obs;
+  RxString country = ''.obs;
 
   @override
   onInit() {
     super.onInit();
+    getData();
     fetchCountry(CountryTheme(
       isShowFlag: true,
       isShowTitle: true,
@@ -31,6 +35,23 @@ class CountryController extends BaseController {
       showEnglishName: false,
       labelColor: Colors.blueAccent,
     ));
+  }
+
+  Future<void> getData() async {
+    dataStream = await FirebaseFirestore.instance.collection('users').get();
+    userData.clear();
+    for (var data in dataStream!.docs) {
+      userData.add(UserResponse(
+        email: data["email"],
+        country: data["country"],
+        topic: data["topic"],
+        uid: data["uid"],
+      ));
+      selectedCountry.value = userData[0].country!;
+      debugPrint("selected countru : ${selectedCountry.value}");
+
+    }
+    loader.value = false;
   }
 
   Future<void> fetchCountry(theme) async {

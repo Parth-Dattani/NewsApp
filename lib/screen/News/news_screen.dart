@@ -60,9 +60,16 @@ class NewsScreen extends GetView<NewsController> {
                       indicatorWeight: 5,
                       indicatorSize: TabBarIndicatorSize.label,
                       unselectedLabelColor: ColorsConfig.colorBlack,
+                      onTap: (e){
+                        print("Taped Item Name :${controller.tabList[e]}");
+                        controller.category = controller.tabList[e];
+                        print("object cate : ${controller.category}");
+                        controller.categoryNews(controller.category);
+                      },
                       tabs: List.generate(
                           controller.tabList.length,
                               (index) => Tab(
+
                             child: Text(
                               controller.tabList[index],
                               style: CustomTextStyle.newsHeadLineText,
@@ -75,44 +82,46 @@ class NewsScreen extends GetView<NewsController> {
                   height: 20,
                 ),
                 Flexible(
-                  child: TabBarView(
-                      physics: const NeverScrollableScrollPhysics(),
-                      controller: controller.tabController,
-                      children:
-                      List.generate(
-                          controller.tabList.length,
-                              (index) {
-                            return ListView.separated(
-                                itemCount: controller.resultDataList.length,
-                                itemBuilder: (context, index) {
-                                  return NewsListWidget(
-                                    section: controller.resultDataList[index].section.toString(),
-                                    title: controller.resultDataList[index].title.toString(),
-                                    byLine: controller.resultDataList[index].orgFacet!.isNotEmpty
-                                        ? controller
-                                        .resultDataList[index].orgFacet!.first
-                                        .toString()
-                                        : '',
-                                    newsLink : controller.resultDataList[index].url.toString(),
-                                    publishedDate:
-                                    controller.resultDataList[index].publishedDate.toString(),
-                                    image: controller.resultDataList[index].multimedia!.isNotEmpty
-                                        ? controller
-                                        .resultDataList[index].multimedia![0].url
-                                        .toString()
-                                        : '',
-                                  );
-                                },
-                                separatorBuilder: (BuildContext context, int index) {
-                                  return Container(height: 35.0);
-                                });
+                  child:  TabBarView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        controller: controller.tabController,
+                        children:
+                        List.generate(
+                            controller.tabList.length,
+                                (index) {
+                              return Obx(
+                                ()=> ListView.separated(
+                                    itemCount: controller.resultDataList.length,
+                                    itemBuilder: (context, index) {
+                                      return NewsListWidget(
+                                        section: controller.resultDataList[index].section.toString(),
+                                        title: controller.resultDataList[index].title.toString(),
+                                        byLine: controller.resultDataList[index].orgFacet!.isNotEmpty
+                                            ? controller
+                                            .resultDataList[index].orgFacet!.first
+                                            .toString()
+                                            : '',
+                                        newsLink : controller.resultDataList[index].url.toString(),
+                                        publishedDate:
+                                        controller.resultDataList[index].publishedDate.toString(),
+                                        image: controller.resultDataList[index].multimedia != null
+                                            ? controller
+                                            .resultDataList[index].multimedia![0].url
+                                            .toString()
+                                            : '',
+                                      );
+                                    },
+                                    separatorBuilder: (BuildContext context, int index) {
+                                      return Container(height: 35.0);
+                                    }),
+                              );
 
-                          })
-                    // const [
-                    //   NewsListWidget(itemCount: 20),
-                    //   Tab(text: "s"),
-                    // ],
-                  ),
+                            })
+                      // const [
+                      //   NewsListWidget(itemCount: 20),
+                      //   Tab(text: "s"),
+                      // ],
+                    ),
                 ),
               ],
             ),

@@ -12,40 +12,71 @@ class NewsController extends BaseController
       TabController(vsync: this, length: tabList.length, initialIndex: 0);
 
   RxList<String> tabList = <String>[
-    "home".tr,
-    "art".tr,
-    "automobiles".tr,
-    "books".tr,
-    "business".tr,
-    "fashion".tr,
-    "food".tr,
-    "health".tr,
-    "insider".tr,
-    "magazine".tr,
-    "movies".tr,
-    "nyregion".tr,
-    "obituaries".tr,
-    "opinion".tr,
-    "politics".tr,
-    "realestate".tr,
-    "science".tr,
-    "sunday_review".tr,
-    "technology".tr,
-    "theater".tr,
-    "t_magazine".tr,
-    "upshot".tr,
-    "us".tr,
-    "world".tr,
+    "home",
+    "arts",
+    "automobiles",
+    "books",
+    "business",
+    "fashion",
+    "food",
+    "health",
+    "insider",
+    "magazine",
+    "movies",
+    "nyregion",
+    "obituaries",
+    "opinion",
+    "politics",
+    "realestate",
+    "science",
+    "sundayreview",
+    "technology",
+    "theater",
+    "t-magazine",
+    "upshot",
+    "us",
+    "world",
   ].obs;
 
   RxList<Results> resultDataList = <Results>[].obs;
   List<String> newsName = <String>[];
+  String? category = 'home';
 
   @override
   void onInit() {
-    getNews();
+    //getNews();
+    categoryNews(category);
     super.onInit();
   }
+
+  void categoryNews(category) async {
+    try {
+      resultDataList.clear();
+      loader.value = true;
+      var response = await RemoteServices.categoryNews(category);
+      if (response.statusCode == 200) {
+        var jsonData = json.decode(response.body);
+
+        //newsResponse.value =  NewsResponse.fromJson(jsonData);
+
+        var data = jsonData['results'];
+        if (data.isNotEmpty) {
+          loader.value = false;
+          for (var i in data) {
+            resultDataList.add(Results.fromJson(i));
+          }
+          //newsResponse.value = NewsResponse.fromJson(jsonData as Map<String, dynamic>);
+          print("List : ${resultDataList[0].section}");
+          loader.value = false;
+        } else {
+          loader.value = false;
+        }
+      }
+    } catch (e) {
+      print("Error :- ${e.toString()}");
+    }
+  }
+
 
   void getNews() async {
     try {

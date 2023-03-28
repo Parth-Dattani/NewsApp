@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -71,26 +72,28 @@ class HomePageWidget extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            Container(
-              height: Get.height*0.4,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: ColorsConfig.colorLightGray),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 0.05),
-                    blurRadius: 4,
-                    offset: Offset(0.0, -2),
-                  )
-                ],
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          controller.resultDataList[0].multimedia![0].url.toString()
-                      ),
-                      fit: BoxFit.fill
-                  )
+            SizedBox(
+              height: Get.height*0.40,
+              child:
+              CachedNetworkImage(
+                imageUrl:  controller.resultDataList[0].multimedia![0].url.toString(),
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,),
+                  ),
+                ),
+                placeholder: (context, url) => Transform.scale(
+                  scale: 0.5,
+                  child: const CircularProgressIndicator(
+                    backgroundColor: ColorsConfig.colorRed,
+                    strokeWidth: 3,
+                  ),
+                ),
+                errorWidget: (context, url, error) => const Icon(Icons.error, color: Colors.red,),
               ),
-
             ),
             const SizedBox(
               height: 15,
@@ -154,7 +157,7 @@ class HomePageWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: 25,
+              height: 15,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -175,7 +178,7 @@ class HomePageWidget extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: 25,
+              height: 15,
             ),
             // Obx(
             //   () => controller.resultDataList.isNotEmpty

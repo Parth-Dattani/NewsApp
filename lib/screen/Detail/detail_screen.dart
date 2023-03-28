@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -36,22 +37,26 @@ class DetailScreen extends GetView<DetailController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CircleAvatar(
-                        minRadius: 20,
+                        minRadius: 25,
                         backgroundImage: AssetImage(
                           ImagePath.bbcNewsIcon,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: controller.byLine.value.isEmpty ? MainAxisAlignment.start : MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            controller.byLine.value,
-                            style: CustomTextStyle.appBarText,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
+                          SizedBox(
+                            width: Get.width*0.45,
+                            child: Text(
+                              controller.byLine.value,
+                              style: CustomTextStyle.appBarText,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                            ),
                           ),
                           Text(
                             DateFormat('dd-MM-yyyy').format(
@@ -60,12 +65,13 @@ class DetailScreen extends GetView<DetailController> {
                           ),
                         ],
                       ),
-                      const Spacer(flex: 3),
+                      const Spacer(),
                       CommonButton(
                         name: 'following'.tr,
                         color: ColorsConfig.colorBlue,
                         textStyle: CustomTextStyle.buttonStyle,
                         borderRadius: 6,
+                        minWidth: 70,
                         border: false,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 5),
@@ -78,15 +84,28 @@ class DetailScreen extends GetView<DetailController> {
                   const SizedBox(
                     height: 15,
                   ),
-                  Container(
-                    height: Get.height * 0.4, width: Get.width * 0.90,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                            image:
-                                NetworkImage(controller.image.value, scale: 15),
-                            fit: BoxFit.fill)),
-                    //child:
+
+                  SizedBox(
+                    height: Get.height*0.40,width: Get.width * 0.90,
+                    child: CachedNetworkImage(
+                      imageUrl:  controller.image.value,
+                      imageBuilder: (context, imageProvider) => Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,),
+                        ),
+                      ),
+                      placeholder: (context, url) => Transform.scale(
+                        scale: 0.5,
+                        child: const CircularProgressIndicator(
+                          backgroundColor: ColorsConfig.colorRed,
+                          strokeWidth: 3,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => const Icon(Icons.error, color: Colors.red,),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,

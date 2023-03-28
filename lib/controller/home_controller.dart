@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:news_app/controller/base_controller.dart';
 import '../model/model.dart';
 import '../services/services.dart';
+import '../utils/utils.dart';
 
 class HomeController extends BaseController{
   var tabIndex = 0.obs;
@@ -16,6 +17,7 @@ class HomeController extends BaseController{
   @override
   void onInit() {
     getNews();
+    bookMarkNews();
     super.onInit();
   }
 
@@ -24,14 +26,15 @@ class HomeController extends BaseController{
     tabIndex.value = index;
   }
 
-  // void bookMarkNews()async{
-  //   var result = await sharedPreferencesHelper.retrievePrefData("bookmark_news");
-  //   var list = jsonDecode(result);
-  //   print("list : $list");
-  //   list.map((e) => bookMarkdList.add(Results.fromJson(e))).toList();
-  //   print("book length : ${bookMarkdList.length}");
-  //   print("bookMark : ${jsonEncode(bookMarkdList)}");
-  // }
+
+  void bookMarkNews()async{
+    var result = await sharedPreferencesHelper.retrievePrefData("bookmark_news");
+    var list = jsonDecode(result);
+    print("list : $list");
+    list.map((e) => bookMarkdList.add(Results.fromJson(e))).toList();
+    print("book length : ${bookMarkdList.length}");
+    print("bookMark : ${jsonEncode(bookMarkdList)}");
+  }
 
 
   void getNews() async {

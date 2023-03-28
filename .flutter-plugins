@@ -31,6 +31,7 @@ shared_preferences_web=/Users/theonetech/.pub-cache/hosted/pub.dev/shared_prefer
 shared_preferences_windows=/Users/theonetech/.pub-cache/hosted/pub.dev/shared_preferences_windows-2.1.5/
 sign_in_with_apple=/Users/theonetech/.pub-cache/hosted/pub.dev/sign_in_with_apple-4.3.0/
 sign_in_with_apple_web=/Users/theonetech/.pub-cache/hosted/pub.dev/sign_in_with_apple_web-1.0.1/
+sqflite=/Users/theonetech/.pub-cache/hosted/pub.dev/sqflite-2.2.6/
 url_launcher_linux=/Users/theonetech/.pub-cache/hosted/pub.dev/url_launcher_linux-3.0.4/
 url_launcher_web=/Users/theonetech/.pub-cache/hosted/pub.dev/url_launcher_web-2.0.16/
 url_launcher_windows=/Users/theonetech/.pub-cache/hosted/pub.dev/url_launcher_windows-3.0.5/
