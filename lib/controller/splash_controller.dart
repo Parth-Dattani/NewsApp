@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-
 import '../screen/screen.dart';
 import '../utils/shared_preferences_helper.dart';
 import 'controller.dart';
@@ -17,7 +17,7 @@ class SplashController extends BaseController {
 
 
   void checkLogin() async {
-    print("hello ${await sharedPreferencesHelper.retrievePrefBoolData('isLogin')}");
+    debugPrint("hello ${await sharedPreferencesHelper.retrievePrefBoolData('isLogin')}");
     switch (
     await sharedPreferencesHelper.retrievePrefBoolData('isLogin')) {
       case true:
@@ -26,5 +26,4 @@ class SplashController extends BaseController {
         return Get.offAndToNamed(LoginScreen.pageId);
     }
   }
-
 }

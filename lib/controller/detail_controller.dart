@@ -13,7 +13,6 @@ class DetailController extends BaseController{
   RxString abstract = ''.obs;
   RxBool isBookMark = false.obs;
   RxList<Results> bookMarkdList = <Results>[].obs;
-  RxList bookd = [].obs;
 
   @override
   void onInit() {
@@ -27,14 +26,4 @@ class DetailController extends BaseController{
     debugPrint("abstract : ${abstract.value}");
   }
 
-  void data(){
-    Results r = Results(
-        section: section.value,
-        title:   title.value,
-        byline: byLine.value,
-        createdDate: publishedDate.value,
-        url: image.value,
-        abstract: abstract.value,
-        );
-  }
 }

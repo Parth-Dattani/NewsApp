@@ -3,10 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_media_signin/flutter_social_media_signin.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:news_app/controller/base_controller.dart';
 import 'package:news_app/model/model.dart';
-
 import '../constant/constant.dart';
 import '../screen/Country/country_screen.dart';
 import '../utils/shared_preferences_helper.dart';
@@ -24,24 +22,14 @@ class SignUpController extends BaseController{
   RxBool isRemember = false.obs;
   final auth = FirebaseAuth.instance;
   get user => auth.currentUser;
-  // Future<void> registerWithValidation() async {
-  //   if (signUpFormKey.currentState!.validate()) {
-  //     loader.value = true;
-  //     signUp(emailController.value.text,passwordController.value.text, );
-  //     loader.value = false;
-  //   }
-  // }
-
 
   void signUp(String email, String password) async {
-    print("success");
     loader.value = true;
     await auth
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) async {
       sendDataFirestore(email);
       if (isRemember.value == true ) {
-        print("user has lg");
         sharedPreferencesHelper.storePrefData(email, emailController.text);
         sharedPreferencesHelper.storePrefData(password, passwordController.text);
         sharedPreferencesHelper.storeBoolPrefData('isLogin', true);
@@ -67,7 +55,7 @@ class SignUpController extends BaseController{
     loader.value = false;
   }
 
-  Future<void> signInwithGoogle()async {
+  Future<void> signInWithGoogle()async {
     var googleAuth = await FlutterSocialMediaSignin().signInWithGoogle();
     await auth
         .signInWithCredential(googleAuth)
@@ -75,7 +63,6 @@ class SignUpController extends BaseController{
 
         sendDataFirestore(auth.currentUser!.email.toString(),);
         if (isRemember.value == true ) {
-          print("user has lg");
           sharedPreferencesHelper.storePrefData('email', emailController.text);
           sharedPreferencesHelper.storePrefData('password', passwordController.text);
           sharedPreferencesHelper.storeBoolPrefData('isLogin', true);
@@ -86,10 +73,10 @@ class SignUpController extends BaseController{
         Get.toNamed(CountryScreen.pageId);
         }
     );
-    print("success");
-    print("authf ${auth}");
+    debugPrint("auth: $auth");
     //await Get.toNamed(HomeScreen.pageId);
   }
+
 
   sendDataFirestore(String email) async {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;

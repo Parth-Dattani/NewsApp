@@ -1,15 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/base_controller.dart';
-
 import '../model/model.dart';
 import '../services/services.dart';
-import '../utils/utils.dart';
 
 class HomeController extends BaseController{
-  //RxInt currentIndex = 0.obs;
   var tabIndex = 0.obs;
   final TextEditingController searchController = TextEditingController();
 

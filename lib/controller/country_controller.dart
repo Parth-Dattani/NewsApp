@@ -6,8 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/base_controller.dart';
-import 'package:news_app/model/country_response.dart';
-
 import '../model/model.dart';
 
 class CountryController extends BaseController {
@@ -33,8 +31,6 @@ class CountryController extends BaseController {
       showEnglishName: false,
       labelColor: Colors.blueAccent,
     ));
-
-    //searchCountry("Ba");
   }
 
   Future<void> fetchCountry(theme) async {
@@ -61,7 +57,7 @@ class CountryController extends BaseController {
           .where((p0) => p0.name!.toLowerCase().contains(key.toLowerCase()))
           .toList();
 
-      countryList.map((element) => print("search ${element.name}")).toList();
+      countryList.map((element) => debugPrint("search : ${element.name}")).toList();
     } else {
       countryList.addAll(searchList);
     }

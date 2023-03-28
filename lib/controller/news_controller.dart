@@ -1,10 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:news_app/controller/base_controller.dart';
 import 'package:get/get.dart';
 import 'package:news_app/model/model.dart';
-
 import '../services/services.dart';
 
 class NewsController extends BaseController
@@ -40,9 +38,7 @@ class NewsController extends BaseController
     "world".tr,
   ].obs;
 
-  //RxList<NewsResponse> newsDataList = <NewsResponse>[].obs;
   RxList<Results> resultDataList = <Results>[].obs;
-  //Rx<NewsResponse> newsResponse = NewsResponse().obs;
   List<String> newsName = <String>[];
 
   @override
@@ -67,14 +63,14 @@ class NewsController extends BaseController
             resultDataList.add(Results.fromJson(i));
           }
           //newsResponse.value = NewsResponse.fromJson(jsonData as Map<String, dynamic>);
-          print("List : ${resultDataList[0].section}");
+          debugPrint("List : ${resultDataList[0].section}");
           loader.value = false;
         } else {
           loader.value = false;
         }
       }
     } catch (e) {
-      print("Error :- ${e.toString()}");
+      debugPrint("Error :- ${e.toString()}");
     }
   }
 }

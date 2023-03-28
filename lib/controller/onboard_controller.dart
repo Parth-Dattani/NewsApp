@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_app/constant/constant.dart';
 import 'package:news_app/controller/base_controller.dart';
 
 class OnBoardController extends BaseController{

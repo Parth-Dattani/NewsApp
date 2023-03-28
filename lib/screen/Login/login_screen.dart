@@ -166,7 +166,7 @@ class LoginScreen extends GetView<LoginController>{
                           border: false,
                           padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 12),
                           onPress: (){
-                            controller.signInwithGoogle();
+                            controller.signInWithGoogle();
                           },
                         ),
                         const SizedBox(height: 16,),

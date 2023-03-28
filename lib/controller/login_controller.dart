@@ -28,10 +28,9 @@ class LoginController extends BaseController{
         email: email,
         password: password,
       );
-      print("user : $user");
+      debugPrint("user : $user");
 
       if (isRemember.value == true ) {
-        print("user has lg");
         sharedPreferencesHelper.storePrefData(email, emailController.text);
         sharedPreferencesHelper.storePrefData(password, passwordController.text);
         sharedPreferencesHelper.storeBoolPrefData('isLogin', true);
@@ -49,25 +48,24 @@ class LoginController extends BaseController{
     }
   }
 
-  Future<void> signInwithGoogle()async {
+  Future<void> signInWithGoogle()async {
     var googleAuth = await FlutterSocialMediaSignin().signInWithGoogle();
     await auth
         .signInWithCredential(googleAuth)
         .whenComplete(() =>
-        sendDataFirestore(auth.currentUser!.email.toString(),)
+        sendDataFireStore(auth.currentUser!.email.toString(),)
     );
-    print("success");
-    print("authf ${auth}");
+    debugPrint("auth : $auth");
     await Get.toNamed(CountryScreen.pageId);
   }
 
-  sendDataFirestore(String email) async {
-    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  sendDataFireStore(String email) async {
+    FirebaseFirestore firebaseFireStore = FirebaseFirestore.instance;
     User? user = auth.currentUser;
     UserResponse userData = UserResponse();
     userData.email = email;
     userData.uid = user!.uid;
-    await firebaseFirestore
+    await firebaseFireStore
         .collection("users")
         .doc(user.uid)
         .set(userData.toMap());

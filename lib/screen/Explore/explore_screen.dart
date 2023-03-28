@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/controller.dart';
-import 'package:news_app/widgets/common_appbar.dart';
-import 'package:share_plus/share_plus.dart';
-
 import '../../constant/constant.dart';
 import '../../widgets/widgets.dart';
 
@@ -37,7 +33,7 @@ class ExploreScreen extends GetView<ExploreController>{
                 )
               ],
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Expanded(child: ListView.separated(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
