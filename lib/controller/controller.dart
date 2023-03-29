@@ -11,3 +11,5 @@ export 'congratulate_controller.dart';
 export 'detail_controller.dart';
 export 'explore_controller.dart';
 export 'bookmark_controller.dart';
+export 'profile_controller.dart';
+export 'book_detail_controller.dart';

@@ -27,7 +27,8 @@ class BookMarkController extends BaseController {
     print("list Length : ${list.length}");
     list.map((e) => bookMarkdList.add(Results.fromJson(e))).toList();
     print("book Length : ${bookMarkdList.length}");
-    print("bookMark : ${jsonEncode(bookMarkdList)}");
-    print("bookMark 0: ${jsonEncode(bookMarkdList[1].section)}");
+    print("bookMark List Data: ${jsonEncode(bookMarkdList.toString())}");
+    print("bookMark 00: ${bookMarkdList[0].url ?? ''
+    }");
   }
 }

@@ -62,11 +62,15 @@ class BookMarkScreen extends GetView<BookMarkController> {
                   () => ListView.separated(
                       shrinkWrap: true,
                       itemCount: controller.bookMarkdList.length,
-                      physics: const NeverScrollableScrollPhysics(),
+                      //physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            print("dfkdshf : ${controller.bookMarkdList[index].section.toString()}");
+                            print("dfkdshf : ${controller.bookMarkdList[index].url.toString()}");
+                            print("bookMArk Image URl : ${
+                            controller.bookMarkdList[index].multimedia != null ?
+                            controller.bookMarkdList[index].multimedia![0].url
+                                .toString() : ''}");
                             Get.toNamed(DetailScreen.pageId,
                                 arguments: {
                                   'section': controller.bookMarkdList[index].section.toString(),
@@ -82,27 +86,27 @@ class BookMarkScreen extends GetView<BookMarkController> {
                                 });
 
                           },
-                          child: NewsListWidget(
-                            section: controller.bookMarkdList[index].section
-                                .toString(),
-                            title:
-                                controller.bookMarkdList[index].title.toString(),
-                            byLine: controller.bookMarkdList[index].orgFacet !=
-                                    null
-                                ? controller.bookMarkdList[index].orgFacet!.first
-                                    .toString()
-                                : '',
-                            publishedDate: controller
-                                .bookMarkdList[index].publishedDate
-                                .toString(),
-                            newsLink:
-                                controller.bookMarkdList[index].url.toString(),
-                            image:
-                                controller.bookMarkdList[index].multimedia != null
-                                    ? controller
-                                        .bookMarkdList[index].multimedia![0].url
-                                        .toString()
-                                    : '',
+                          child: Obx(
+                              ()=> NewsListWidget(
+                              section: controller.bookMarkdList[index].section
+                                  .toString(),
+                              title:
+                                  controller.bookMarkdList[index].title.toString(),
+                              byLine: controller.bookMarkdList[index].orgFacet !=
+                                      null
+                                  ? controller.bookMarkdList[index].orgFacet!.first
+                                      .toString()
+                                  : '',
+                              publishedDate: controller
+                                  .bookMarkdList[index].publishedDate
+                                  .toString(),
+                              newsLink:
+                                  controller.bookMarkdList[index].url.toString(),
+                              image:
+                                  controller.bookMarkdList[index].url != null
+                                      ? controller.bookMarkdList[index].url.toString()
+                                      : '',
+                            ),
                           ),
                         );
                       },

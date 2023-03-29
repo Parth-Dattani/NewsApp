@@ -85,38 +85,43 @@ class LoginScreen extends GetView<LoginController>{
 
                                   const SizedBox(height: 10,),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      Row(
-                                        children: [
-                                           Theme(
-                                             data: ThemeData(unselectedWidgetColor: ColorsConfig.colorBlack),
-                                          child:
-                                            Checkbox(
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(3),
-                                              ),
-                                              value: controller.isRemember.value,
-                                              checkColor:ColorsConfig.colorWhite,
-
-                                              activeColor: ColorsConfig.colorBlue,
-                                              onChanged: (value) {
-                                                //setState(() {
-                                                    controller.isRemember.value = value!;
-                                                  //},);
-                                              },
+                                      Theme(
+                                        data: ThemeData(unselectedWidgetColor: ColorsConfig.colorBlack),
+                                        child: SizedBox(
+                                          width : Get.width *0.08,
+                                          child: Checkbox(
+                                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                            visualDensity: VisualDensity.compact,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(3),
                                             ),
+                                            value: controller.isRemember.value,
+                                            checkColor:ColorsConfig.colorWhite,
+
+                                            activeColor: ColorsConfig.colorBlue,
+                                            onChanged: (value) {
+                                                  controller.isRemember.value = value!;
+                                            },
                                           ),
-                                          Text("remember_me".tr, style: CustomTextStyle.labelStyle,)
-                                        ],
+                                        ),
                                       ),
-                                      CommonButton(
-                                        name: "forgot_the_password".tr,
-                                        border: false,
-                                        textStyle: CustomTextStyle.forgotButton,
-                                        onPress: (){
-                                          // Get.toNamed(ForgotPasswordScreen.pageId);
-                                        },
+                                          Container(
+                                            width: Get.width * 0.30,
+                                              child: Text("remember_me".tr, style: CustomTextStyle.labelStyle,
+                                          overflow: TextOverflow.ellipsis,maxLines: 2,)),
+                                      Expanded(
+                                        child: CommonButton(
+                                          name: "forgot_the_password".tr,
+                                          border: false,
+                                          textStyle: CustomTextStyle.forgotButton,
+                                          minWidth: 80,
+                                          onPress: (){
+                                            // Get.toNamed(ForgotPasswordScreen.pageId);
+                                          },
+                                        ),
                                       ),
                                     ],
                                   ),

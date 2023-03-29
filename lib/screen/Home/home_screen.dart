@@ -19,18 +19,23 @@ class HomeScreen extends GetView<HomeController>{
         isLoad: controller.loader.value,
         body: Scaffold(
           backgroundColor: ColorsConfig.colorWhite,
-          body: SafeArea(
-            child: Obx(
-              ()=> IndexedStack(
-                sizing: StackFit.expand,
-                index: controller.tabIndex.value,
-                children: [
-                 controller.resultDataList.isNotEmpty ?
-                 HomePageWidget(searchController: controller.searchController) : Container(),
-                  const ExploreScreen(),
-                  const BookMarkScreen(),
-                  Container(child: Text("${controller.tabIndex.value+1}"),) ,
-                ],
+          body: WillPopScope(
+            onWillPop: ()async {
+              return willPopCallback(context);
+            },
+            child: SafeArea(
+              child: Obx(
+                ()=> IndexedStack(
+                  sizing: StackFit.expand,
+                  index: controller.tabIndex.value,
+                  children: [
+                   controller.resultDataList.isNotEmpty ?
+                   HomePageWidget(searchController: controller.searchController) : Container(),
+                    const ExploreScreen(),
+                    const BookMarkScreen(),
+                    const ProfileScreen(),
+                  ],
+                ),
               ),
             ),
           ),
@@ -41,6 +46,22 @@ class HomeScreen extends GetView<HomeController>{
     );
   }
 
+  Future<bool> willPopCallback(context) async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return CommonDialog(
+            text: "Confirm to Quite App",
+            onYesPress: () {
+              SystemNavigator.pop();
+            },
+            onNoPress: () {
+              Navigator.of(context).pop();
+            },
+          );
+        });
+    return false;
+  }
 
 }
 

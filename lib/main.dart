@@ -1,7 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:news_app/controller/controller.dart';
+import 'package:news_app/utils/common.dart';
 import 'package:news_app/utils/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'constant/constant.dart';
 import 'routs.dart';
 import 'screen/screen.dart';
@@ -10,20 +13,22 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await sharedPreferencesHelper.getSharedPreferencesInstance();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   MyApp({super.key}){
+     getThemeStatus();
+   }
 
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
         title: 'News App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: Common().lightTheme,
+        darkTheme: Common().darkTheme,
+        themeMode: ThemeMode.system,
         debugShowCheckedModeBanner: false,
         initialRoute: SplashScreen.pageId,
         getPages: appPage,
@@ -32,5 +37,16 @@ class MyApp extends StatelessWidget {
         fallbackLocale: const Locale('en', 'US')
     );
   }
+
 }
 
+RxBool isLightTheme = true.obs;
+Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+
+ getThemeStatus() async {
+  var isLight = prefs.then((SharedPreferences prefs) {
+    return prefs.getBool('theme') != null ? prefs.getBool('theme') : true;
+  }).obs;
+  isLightTheme.value = (await isLight.value)!;
+  Get.changeThemeMode(isLightTheme.value ? ThemeMode.light : ThemeMode.dark);
+}

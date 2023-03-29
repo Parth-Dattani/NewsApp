@@ -10,3 +10,5 @@ export 'Congratulate/congratulate_screen.dart';
 export 'Detail/detail_screen.dart';
 export 'Explore/explore_screen.dart';
 export 'Bookmark/bookmark_screen.dart';
+export 'Profile/profile_screen.dart';
+export 'BookDetail/book_detail_screen.dart';

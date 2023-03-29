@@ -10,3 +10,5 @@ export 'congratulate_binding.dart';
 export 'detail_binding.dart';
 export 'explore_binding.dart';
 export 'bookmark_binding.dart';
+export 'profile_binding.dart';
+export 'book_detail_binding.dart';

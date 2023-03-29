@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/controller.dart';
+import 'package:news_app/screen/BookDetail/book_detail_screen.dart';
 import '../../constant/constant.dart';
 
 class ExploreScreen extends GetView<ExploreController>{
@@ -24,54 +25,65 @@ class ExploreScreen extends GetView<ExploreController>{
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: controller.bookList.length,
                     itemBuilder: (context, index) {
-                      return Row(children: [
-                        Container(
-                          height: Get.height*0.15,width: Get.width* 0.30,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                image: AssetImage(ImagePath.appLogo, ),
-                                fit: BoxFit.fitWidth,
-                              )
+                      return GestureDetector(
+                        onTap: (){
+                          debugPrint("Book List NAme :${controller.bookList[index].listName}");
+                          Get.toNamed(BookDetailScreen.pageId,
+                          arguments: {
+                            'listName' : controller.bookList[index].listName,
+                            'date' : controller.bookList[index].oldestPublishedDate,
+                          });
+
+                        },
+                        child: Row(children: [
+                          Container(
+                            height: Get.height*0.15,width: Get.width* 0.30,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  image: AssetImage(ImagePath.appLogo, ),
+                                  fit: BoxFit.fitWidth,
+                                )
+                            ),
+                            //child:
                           ),
-                          //child:
-                        ),
-                        const SizedBox(width: 10,),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                controller.bookList[index].listName.toString(),
-                                style: CustomTextStyle.newsHeadLineText,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                       controller.bookList[index].newestPublishedDate.toString(),
-                                      style: CustomTextStyle.labelStyle,
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
+                          const SizedBox(width: 10,),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  controller.bookList[index].listName.toString(),
+                                  style: CustomTextStyle.newsHeadLineText,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                         controller.bookList[index].newestPublishedDate.toString(),
+                                        style: CustomTextStyle.labelStyle,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 15,),
-                                  Expanded(
-                                    child: Text(
-                                      controller.bookList[index].updated.toString(),
-                                      style: CustomTextStyle.labelStyle,
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
+                                    const SizedBox(width: 15,),
+                                    Expanded(
+                                      child: Text(
+                                        controller.bookList[index].updated.toString(),
+                                        style: CustomTextStyle.labelStyle,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ]);
+                        ]),
+                      );
                     },
                     separatorBuilder: (BuildContext context, int index) {
                       return Container(height: 10.0);

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/controller/controller.dart';
 import 'package:news_app/model/model.dart';
+import 'package:share_plus/share_plus.dart';
 import '../../constant/constant.dart';
 import '../../utils/shared_preferences_helper.dart';
 import '../../widgets/widgets.dart';
@@ -22,13 +23,16 @@ class DetailScreen extends GetView<DetailController> {
         backgroundColor: ColorsConfig.colorWhite,
         appBar: CommonAppBar(
           leadingIcon: ImagePath.arrowBack,
-          actionIcon: Image.asset(ImagePath.shareIcon, scale: 25,),
-          //actionIconSize: 130.5,
-          //actionIconSize2: 30.5,
+          actionIcon: ImagePath.shareIcon,
+          actionOnTap: (){
+            Share.share(controller.bookMarkdList[0].section.toString(), subject: "Today's News");
+          },
           secondVisible: true,
-          actionIcon2: Image.asset(ImagePath.shareIcon,scale:25 ),
-          actionOnTap: (){},
+          actionIcon2: ImagePath.moreIcon,
+          actionIconSize2: 90,
+
           actionOnTap2: (){
+            print("more Click");
           },
         ),
         body: SafeArea(
@@ -185,6 +189,7 @@ class DetailScreen extends GetView<DetailController> {
                       debugPrint("isBookMark : ${controller.isBookMark.value}");
                       controller.isBookMark.value = !controller.isBookMark.value;
                       debugPrint("isBookMark : ${controller.isBookMark.value}");
+
                       // sharedPreferencesHelper.storePrefData("bookmark_news" , controller.title.value);
 
 

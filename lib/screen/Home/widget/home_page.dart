@@ -25,7 +25,7 @@ class HomePageWidget extends StatelessWidget {
         leadingWidth: 150,
         iconSize: 4.5,
         actionIconSize: 4.5,
-        actionIcon: Image.asset(ImagePath.notificationIcon),
+        actionIcon: ImagePath.notificationIcon,
         actionOnTap: (){
           print("action tap 1");
         },

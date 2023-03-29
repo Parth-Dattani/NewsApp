@@ -56,4 +56,12 @@ final List<GetPage> appPage = [
       page: () =>  const BookMarkScreen(),
       binding: BookMarkBinding()),
 
+  GetPage(
+      name: ProfileScreen.pageId,
+      page: () =>  const ProfileScreen(),
+      binding: ProfileBinding()),
+  GetPage(
+      name: BookDetailScreen.pageId,
+      page: () =>  const BookDetailScreen(),
+      binding: BookDetailBinding()),
 ];

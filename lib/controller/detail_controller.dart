@@ -27,7 +27,7 @@ class DetailController extends BaseController{
     publishedDate.value = Get.arguments['publishedDate'].toString();
     image.value = Get.arguments['image'].toString();
     abstract.value = Get.arguments['abstract'].toString();
-    debugPrint("abstract : ${abstract.value}");
+    debugPrint("Image : ${image.value}");
 
     retriveData();
   }

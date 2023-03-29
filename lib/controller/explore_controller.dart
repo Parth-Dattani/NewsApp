@@ -2,12 +2,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/base_controller.dart';
-import 'package:news_app/model/book_response.dart';
+import '../model/model.dart';
 import '../services/services.dart';
 
 class ExploreController extends BaseController {
   RxList<BookResults> bookList = <BookResults>[].obs;
   RxBool isSave = false.obs;
+
 
   RxList<String> tabList = <String>[
     "home".tr,
@@ -35,6 +36,7 @@ class ExploreController extends BaseController {
     "us".tr,
     "world".tr,
   ].obs;
+  RxList<Books> bookDetailsList = <Books>[].obs;
 
   @override
   void onInit() {
@@ -67,4 +69,7 @@ class ExploreController extends BaseController {
       debugPrint("Error :- ${e.toString()}");
     }
   }
+
+
 }
+

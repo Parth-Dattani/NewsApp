@@ -7,7 +7,9 @@ class RemoteServices {
 
   static const accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIyMC44My4zMi43M1wvdGVzdF9xdWl6IiwiYXVkIjoiVEhFX0FVRElFTkNFIiwiaWF0IjoxNjc4MTAwNDcwLCJkYXRhIjp7ImlkIjoiMzg0IiwiZW1haWwiOiJwZEBnbWFpbC5jb20ifX0.mT_ciRtBRwpCDprGJ4eHBF9PMA0G0fdE6DVTz7cWVsU";
 
-  static String category= '';
+  static String category = '';
+  static String date = '';
+  static String listName = '';
 
   static void printResponse(
       Map<String, String> header, dynamic body, http.Response response) {
@@ -49,12 +51,21 @@ class RemoteServices {
     };
 
     http.Response response = await http.get(
-        Uri.parse(Apis.bookApi),
+        Uri.parse(Apis.bookListApi),
         headers: header);
     printResponse(header, null, response);
     return response;
   }
 
+  static Future<http.Response> getBookDetails(date, listName) async {
+    Map<String, String> header = {
+      //'Authorization': 'Bearer $accessToken'
+    };
 
-
+    http.Response response = await http.get(
+        Uri.parse('${Apis.bookApi + date}/' + listName + Apis.newsCategoryAPI),
+        headers: header);
+    printResponse(header, null, response);
+    return response;
+  }
 }

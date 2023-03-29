@@ -10,5 +10,6 @@ class HomeBinding extends Bindings{
     Get.lazyPut<HomeController>(() => HomeController());
     Get.lazyPut<ExploreController>(() => ExploreController());
     Get.lazyPut<BookMarkController>(() => BookMarkController());
+    Get.lazyPut<ProfileController>(() => ProfileController());
   }
 }

@@ -16,8 +16,8 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget{
   //final List? actionIcon2;
   final VoidCallback? actionOnTap;
   final VoidCallback? actionOnTap2;
-  final Widget? actionIcon;
-  final Widget? actionIcon2;
+  final String? actionIcon;
+  final String? actionIcon2;
   final bool? secondVisible;
 
   const CommonAppBar({
@@ -66,22 +66,21 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget{
               onTap: actionOnTap ?? (){
                 //Get.back();
               },
-              child: actionIcon??
-              Image.asset(ImagePath.notificationIcon, scale: actionIconSize ??  25.0,),
-
+              child: actionIcon != null ?
+              Image.asset(actionIcon!, scale: actionIconSize ??  25.0,) : Container()
 
             ) ,
-
+            const SizedBox(width: 20,),
             Visibility(
               visible:  secondVisible ! ,
                 child: GestureDetector(
                     onTap: actionOnTap2 ?? (){
                       //Get.back();
                     },
-                    child: actionIcon2?? Image.asset(ImagePath.notificationIcon, scale: actionIconSize2 ??  25.0,))),
-          ],
+                    child: actionIcon2 != null ? Image.asset(actionIcon2!, scale: actionIconSize2 ??  25.0,): Container()
+    ))],
         ),
-
+        const SizedBox(width: 10,),
       ],
     );
   }
