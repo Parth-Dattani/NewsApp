@@ -12,3 +12,4 @@ export 'explore_binding.dart';
 export 'bookmark_binding.dart';
 export 'profile_binding.dart';
 export 'book_detail_binding.dart';
+export 'edit_profile_binding.dart';

@@ -16,18 +16,33 @@ class CommonDialog extends StatelessWidget {
     return AlertDialog(
       title: Text(
         'Are you sure?',
-        style: CustomTextStyle.titleStyle,
+          style:  Theme.of(context).textTheme.displayLarge!.copyWith(
+              fontFamily: AppTextStyle.poppinsBold,
+              fontSize: AppTextStyle.textFontSize24,
+              fontWeight: FontWeight.w700,
+              letterSpacing: AppTextStyle.letterSpacing
+          )
       ),
       content: Text(
         '$text?',
-        style: CustomTextStyle.subTitleStyle,
+        style:  Theme.of(context).textTheme.displayMedium!.copyWith(
+            fontFamily: AppTextStyle.poppinsRegular,
+            fontSize: AppTextStyle.textFontSize18,
+            fontWeight: FontWeight.w400,
+            letterSpacing: AppTextStyle.letterSpacing
+        ),
       ),
       actions: <Widget>[
         TextButton(
           onPressed: onYesPress,
           child: Text(
             '$yesText',
-            style: CustomTextStyle.subTitleStyle,
+            style:  Theme.of(context).textTheme.displayMedium!.copyWith(
+                fontFamily: AppTextStyle.poppinsRegular,
+                fontSize: AppTextStyle.textFontSize18,
+                fontWeight: FontWeight.w400,
+                letterSpacing: AppTextStyle.letterSpacing
+            ),
           ),
         ),
         TextButton(

@@ -13,6 +13,27 @@ class Validator {
     return null;
   }
 
+  static String? isUserName(userName) {
+    if (userName.toString().trim().isEmpty) {
+      return 'please_enter_username'.tr;
+    }
+    return null;
+  }
+
+  static String? isFullName(fullName) {
+    if (fullName.toString().trim().isEmpty) {
+      return 'please_enter_fullname'.tr;
+    }
+    return null;
+  }
+
+  static String? isPhone(phone) {
+    if (phone.toString().trim().isEmpty) {
+      return 'please_enter_phone'.tr;
+    }
+    return null;
+  }
+
   static String? isPassword(password) {
     if (password.toString().trim().isEmpty) {
       controller.passFIllColor.value = true;

@@ -74,6 +74,21 @@ class Language extends Translations {
           "saved" : "Saved",
           "popular_topic" : "Popular Topic",
           "publish_date" : "Publish Date",
+          "followers" : "Followers",
+          "news" : "News",
+          "edit_profile" : "Edit profile",
+          "website" : "Website",
+          "notification" : "Notification",
+          "security" : "Security",
+          "help" : "Help",
+          "settings" : "Settings",
+          "dark_mode" : "Dark Mode",
+          "please_enter_username" : "Please Enter UserName",
+          "please_enter_fullname" : "Please Enter FullName",
+          "fullname" : "FullName",
+          "email_eddress*" : "Email Address*",
+          "phone_number" : "Phone Number**",
+          "bio" : "Bio",
         }
       };
 }

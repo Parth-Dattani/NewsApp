@@ -134,7 +134,14 @@ class CustomTextStyle {
   );
 
   static TextStyle appBarText = const TextStyle(
-    color: ColorsConfig.colorBlack,
+    //color: ColorsConfig.colorBlack,
+    fontFamily: AppTextStyle.poppinsRegular,
+    fontSize: AppTextStyle.textFontSize16,
+    fontWeight: FontWeight.w600,
+  );
+
+  static TextStyle appBarTextDark = const TextStyle(
+    color: ColorsConfig.colorWhite,
     fontFamily: AppTextStyle.poppinsRegular,
     fontSize: AppTextStyle.textFontSize16,
     fontWeight: FontWeight.w600,

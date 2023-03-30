@@ -51,35 +51,35 @@ class NewsScreen extends GetView<NewsController> {
                 const SizedBox(
                   height: 15,
                 ),
-                DefaultTabController(
-                  length: controller.tabList.length,
-                  child: TabBar(
-                      isScrollable: true,
-                      labelPadding: const EdgeInsets.only(right: 10),
-                      controller: controller.tabController,
-                      labelColor: ColorsConfig.colorWhite,
-                      indicatorWeight: 5,
-                      indicatorSize: TabBarIndicatorSize.label,
-                      unselectedLabelColor: ColorsConfig.colorBlack,
-                      onTap: (e){
-                        controller.category = controller.tabList[e];
-                        controller.categoryNews(controller.category);
-                      },
-                      tabs: List.generate(
-                          controller.tabList.length,
-                              (index) => Tab(
-
-                            child: Text(
-                              controller.tabList[index],
-                              style: CustomTextStyle.newsHeadLineText,
-                            ),
-                          ))
-
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
+                // DefaultTabController(
+                //   length: controller.tabList.length,
+                //   child: TabBar(
+                //       isScrollable: true,
+                //       labelPadding: const EdgeInsets.only(right: 10),
+                //       controller: controller.tabController,
+                //       labelColor: ColorsConfig.colorWhite,
+                //       indicatorWeight: 5,
+                //       indicatorSize: TabBarIndicatorSize.label,
+                //       unselectedLabelColor: ColorsConfig.colorBlack,
+                //       onTap: (e){
+                //         controller.category = controller.tabList[e];
+                //         controller.categoryNews(controller.category);
+                //       },
+                //       tabs: List.generate(
+                //           controller.tabList.length,
+                //               (index) => Tab(
+                //
+                //             child: Text(
+                //               controller.tabList[index],
+                //               style: CustomTextStyle.newsHeadLineText,
+                //             ),
+                //           ))
+                //
+                //   ),
+                // ),
+                // const SizedBox(
+                //   height: 20,
+                // ),
                 Flexible(
                   child:  TabBarView(
                         physics: const NeverScrollableScrollPhysics(),

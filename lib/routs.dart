@@ -64,4 +64,8 @@ final List<GetPage> appPage = [
       name: BookDetailScreen.pageId,
       page: () =>  const BookDetailScreen(),
       binding: BookDetailBinding()),
+  GetPage(
+      name: EditProfileScreen.pageId,
+      page: () =>  EditProfileScreen(),
+      binding: EditProfileBinding()),
 ];

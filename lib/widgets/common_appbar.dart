@@ -42,10 +42,14 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget{
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: true,
-      backgroundColor: ColorsConfig.colorWhite,
+      //backgroundColor: ColorsConfig.colorWhite,
       elevation: 0,
 
-      title: Text(title ?? '', style: CustomTextStyle.appBarText),
+      title: Text(title ?? '', style: Theme.of(context).textTheme.displayLarge!.copyWith(
+        fontFamily: AppTextStyle.poppinsRegular,
+        fontSize: AppTextStyle.textFontSize16,
+        fontWeight: FontWeight.w600,
+      )),
       leading: GestureDetector(
         onTap: leadingOnTap ?? (){
           Get.back();
@@ -67,17 +71,20 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget{
                 //Get.back();
               },
               child: actionIcon != null ?
-              Image.asset(actionIcon!, scale: actionIconSize ??  25.0,) : Container()
+              Image.asset(actionIcon!, scale: actionIconSize ??  25.0,
+              color: Theme.of(context).brightness == Brightness.light? ColorsConfig.colorBlack : ColorsConfig.colorWhite,
+              ) : Container()
 
             ) ,
-            const SizedBox(width: 20,),
+           SizedBox(width: actionIcon2 != null ?  20 :0,),
             Visibility(
               visible:  secondVisible ! ,
                 child: GestureDetector(
                     onTap: actionOnTap2 ?? (){
                       //Get.back();
                     },
-                    child: actionIcon2 != null ? Image.asset(actionIcon2!, scale: actionIconSize2 ??  25.0,): Container()
+                    child: actionIcon2 != null ? Container(
+                        child: Image.asset(actionIcon2!, scale: actionIconSize2 ??  25.0,)): Container()
     ))],
         ),
         const SizedBox(width: 10,),

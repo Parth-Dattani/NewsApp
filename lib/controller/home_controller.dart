@@ -1,8 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:news_app/constant/constant.dart';
 import 'package:news_app/controller/base_controller.dart';
+import 'package:news_app/screen/Bookmark/bookmark_screen.dart';
+import 'package:news_app/screen/Detail/detail_screen.dart';
+import 'package:news_app/screen/Explore/explore_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../model/model.dart';
+import '../screen/screen.dart';
 import '../services/services.dart';
 import '../utils/utils.dart';
 
@@ -18,7 +24,7 @@ class HomeController extends BaseController{
   void onInit() {
     getNews();
     bookMarkNews();
-    super.onInit();
+   super.onInit();
   }
 
   //bottom NavBar Index
@@ -44,9 +50,6 @@ class HomeController extends BaseController{
       if (response.statusCode == 200) {
 
         var jsonData = json.decode(response.body);
-
-        //newsResponse.value =  NewsResponse.fromJson(jsonData) as List<NewsResponse>;
-
           var data = jsonData['results'];
           if (data.isNotEmpty) {
             //loader.value = false;
@@ -68,4 +71,7 @@ class HomeController extends BaseController{
     //   debugPrint("Error :- ${e.toString()}");
     // }
   }
+
+
 }
+

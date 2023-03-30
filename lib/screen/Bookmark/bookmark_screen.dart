@@ -27,7 +27,12 @@ class BookMarkScreen extends GetView<BookMarkController> {
           child: Column(
              crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("bookmark".tr, style: CustomTextStyle.titleHeadStyle,),
+              Text("bookmark".tr, style:  Theme.of(context).textTheme.displayLarge!.copyWith(
+                fontFamily: AppTextStyle.poppinsBold,
+                fontSize: AppTextStyle.textFontSize32,
+                fontWeight: FontWeight.w700,
+                letterSpacing: AppTextStyle.letterSpacing,
+              )),
               const SizedBox(height: 15,),
               CommonTextField(
                 controller: controller.searchController,

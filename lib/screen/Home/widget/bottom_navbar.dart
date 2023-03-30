@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../constant/constant.dart';
 
-Widget bottomNavBar({ tabIndex,  changeTabIndex}) {
+Widget bottomNavBar({ tabIndex,  changeTabIndex, context}) {
   return BottomNavigationBar(
     type: BottomNavigationBarType.fixed,
     currentIndex: tabIndex,
-    backgroundColor: ColorsConfig.colorWhite,
     selectedItemColor: ColorsConfig.colorBlue,
-    unselectedItemColor: ColorsConfig.colorBlack,
+    //unselectedItemColor: Theme.of(context).brightness == Brightness.light ?  ColorsConfig.colorBlack :  ColorsConfig.colorMixGray,
     selectedFontSize: 14,
     unselectedFontSize: 14,
     elevation: 25,

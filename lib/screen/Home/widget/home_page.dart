@@ -24,8 +24,8 @@ class HomePageWidget extends StatelessWidget {
         leadingIcon: ImagePath.appLogo,
         leadingWidth: 150,
         iconSize: 4.5,
-        actionIconSize: 4.5,
-        actionIcon: ImagePath.notificationIcon,
+        actionIconSize: 40,
+        actionIcon: ImagePath.notiIcon,
         actionOnTap: (){
           print("action tap 1");
         },
@@ -44,14 +44,13 @@ class HomePageWidget extends StatelessWidget {
                   onPressed: () {},
                   icon: const Icon(
                     Icons.search,
-                    color: ColorsConfig.colorGray,
+
                     size: 20,
                   )),
               suffixIcon: IconButton(
                   onPressed: () {},
                   icon: Image.asset(
                     ImagePath.filterIcon,
-                    color: ColorsConfig.colorGray,
                   )),
               onChanged: (data) {
                 //controller.searchTopic(data);
@@ -69,7 +68,12 @@ class HomePageWidget extends StatelessWidget {
                 ),
                 Text(
                   "see_all".tr,
-                  style: CustomTextStyle.labelStyle,
+                    style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+                      fontFamily: AppTextStyle.poppinsRegular,
+                      fontSize: AppTextStyle.textFontSize14,
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: AppTextStyle.letterSpacing,
+                    )
                 )
               ],
             ),
@@ -104,14 +108,23 @@ class HomePageWidget extends StatelessWidget {
             ),
             Text(
               controller.resultDataList[0].section.toString(),
-              style: CustomTextStyle.timeStyle,
+               style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+              fontFamily: AppTextStyle.poppinsRegular,
+              fontSize: AppTextStyle.textFontSize13,
+              fontWeight: FontWeight.w400,
+              letterSpacing: AppTextStyle.letterSpacing,
+            )
             ),
             const SizedBox(
               height: 5,
             ),
             Text(
               controller.resultDataList[0].title.toString(),
-              style: CustomTextStyle.newsHeadLineText,
+                style:  Theme.of(context).textTheme.displayMedium!.copyWith(
+                  fontFamily: AppTextStyle.poppinsRegular,
+                  fontSize: AppTextStyle.textFontSize16,
+                  fontWeight: FontWeight.w400,
+                )
             ),
             const SizedBox(
               height: 5,
@@ -133,7 +146,12 @@ class HomePageWidget extends StatelessWidget {
                           controller.resultDataList[0].orgFacet!.isNotEmpty
                               ? controller.resultDataList[0].orgFacet!.first.toString()
                               : '',
-                          style: CustomTextStyle.timeStyle,
+                          style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+                            fontFamily: AppTextStyle.poppinsRegular,
+                            fontSize: AppTextStyle.textFontSize13,
+                            fontWeight: FontWeight.w400,
+                            letterSpacing: AppTextStyle.letterSpacing,
+                          ),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),
@@ -147,12 +165,18 @@ class HomePageWidget extends StatelessWidget {
                       ),
                       Text(
                         DateFormat('dd-MM-yyyy').format(DateTime.parse(controller.resultDataList[0].publishedDate.toString()))
-                        , style: CustomTextStyle.timeStyle,),
+                        ,
+                        style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+                          fontFamily: AppTextStyle.poppinsRegular,
+                          fontSize: AppTextStyle.textFontSize13,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: AppTextStyle.letterSpacing,
+                        ),)
                     ],
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.more_horiz, color: ColorsConfig.colorGray,),
+                  icon: const Icon(Icons.more_horiz,),
                   onPressed: (){
                     debugPrint("Share Link : ${controller.resultDataList[0].url.toString()}");
                     Share.share(controller.resultDataList[0].url.toString(), subject: "Today's News");
@@ -173,7 +197,12 @@ class HomePageWidget extends StatelessWidget {
                 TextButton(
                   child: Text(
                     "see_all".tr,
-                    style: CustomTextStyle.labelStyle,
+                      style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+                        fontFamily: AppTextStyle.poppinsRegular,
+                        fontSize: AppTextStyle.textFontSize14,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: AppTextStyle.letterSpacing,
+                      )
                   ),
                   onPressed: () {
                     Get.toNamed(NewsScreen.pageId);
@@ -219,9 +248,8 @@ class HomePageWidget extends StatelessWidget {
                             publishedDate: controller.resultDataList[index].publishedDate.toString(),
                             newsLink:
                                 controller.resultDataList[index].url.toString(),
-                            image: controller.resultDataList[index].multimedia!.isNotEmpty
-                                ? controller
-                                .resultDataList[index].multimedia![0].url.toString()
+                            image: controller.resultDataList[index].multimedia != null
+                                ? controller.resultDataList[index].multimedia![0].url.toString()
                                 : '',
                           ),
                         );

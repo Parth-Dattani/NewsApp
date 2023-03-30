@@ -17,7 +17,13 @@ class ExploreScreen extends GetView<ExploreController>{
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("explore".tr, style: CustomTextStyle.titleHeadStyle,),
+              //Text("explore".tr, style: CustomTextStyle.titleHeadStyle,),
+              Text("explore".tr, style:  Theme.of(context).textTheme.displayLarge!.copyWith(
+                fontFamily: AppTextStyle.poppinsBold,
+                fontSize: AppTextStyle.textFontSize32,
+                fontWeight: FontWeight.w700,
+                letterSpacing: AppTextStyle.letterSpacing,
+              )),
               const SizedBox(height: 15,),
               Obx(
                 ()=> ListView.separated(
@@ -54,7 +60,11 @@ class ExploreScreen extends GetView<ExploreController>{
                               children: [
                                 Text(
                                   controller.bookList[index].listName.toString(),
-                                  style: CustomTextStyle.newsHeadLineText,
+                                  style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                                    fontFamily: AppTextStyle.poppinsRegular,
+                                    fontSize: AppTextStyle.textFontSize16,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 2,
                                 ),
@@ -63,7 +73,12 @@ class ExploreScreen extends GetView<ExploreController>{
                                     Expanded(
                                       child: Text(
                                          controller.bookList[index].newestPublishedDate.toString(),
-                                        style: CustomTextStyle.labelStyle,
+                                        style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                                          fontFamily: AppTextStyle.poppinsRegular,
+                                          fontSize: AppTextStyle.textFontSize14,
+                                          fontWeight: FontWeight.w400,
+                                          letterSpacing: AppTextStyle.letterSpacing,
+                                        ),
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2,
                                       ),
@@ -72,7 +87,12 @@ class ExploreScreen extends GetView<ExploreController>{
                                     Expanded(
                                       child: Text(
                                         controller.bookList[index].updated.toString(),
-                                        style: CustomTextStyle.labelStyle,
+                                        style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                                          fontFamily: AppTextStyle.poppinsRegular,
+                                          fontSize: AppTextStyle.textFontSize14,
+                                          fontWeight: FontWeight.w400,
+                                          letterSpacing: AppTextStyle.letterSpacing,
+                                        ),
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2,
                                       ),

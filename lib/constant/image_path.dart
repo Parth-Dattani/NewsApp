@@ -7,6 +7,7 @@ mixin ImagePath {
   static String googleIcon = 'assets/images/googleIcon.png';
   static String arrowBack = 'assets/images/arrowBack.png';
   static String notificationIcon = 'assets/images/notification.png';
+  static String notiIcon = 'assets/images/noti.png';
   static String homeIcon = 'assets/images/home.png';
   static String exploreIcon = 'assets/images/explore.png';
   static String bookMarkIcon = 'assets/images/bookmark.png';
@@ -16,4 +17,9 @@ mixin ImagePath {
   static String shareIcon = 'assets/images/share.png';
   static String commentIcon = 'assets/images/comment.png';
   static String moreIcon = 'assets/images/more.png';
+  static String settingIcon = 'assets/images/setting.png';
+  static String arrowForwardIcon = 'assets/images/arrowForword.png';
+  static String closeIcon = 'assets/images/close.png';
+  static String checkIcon = 'assets/images/check.png';
+  static String cameraIcon = 'assets/images/camera.png';
 }

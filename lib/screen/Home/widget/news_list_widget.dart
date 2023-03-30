@@ -57,13 +57,22 @@ class NewsListWidget extends StatelessWidget {
           children: [
             Text(
               section,
-              style: CustomTextStyle.timeStyle,
+             style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+               fontFamily: AppTextStyle.poppinsRegular,
+               fontSize: AppTextStyle.textFontSize13,
+               fontWeight: FontWeight.w400,
+               letterSpacing: AppTextStyle.letterSpacing,
+        ),
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
             ),
             Text(
               title,
-              style: CustomTextStyle.newsHeadLineText,
+              style:  Theme.of(context).textTheme.displayMedium!.copyWith(
+                fontFamily: AppTextStyle.poppinsRegular,
+                fontSize: AppTextStyle.textFontSize16,
+                fontWeight: FontWeight.w400,
+              ),
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
             ),
@@ -85,7 +94,12 @@ class NewsListWidget extends StatelessWidget {
                       Expanded(
                         child: Text(
                           byLine,
-                          style: CustomTextStyle.timeStyle,
+                          style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+                            fontFamily: AppTextStyle.poppinsRegular,
+                            fontSize: AppTextStyle.textFontSize13,
+                            fontWeight: FontWeight.w400,
+                            letterSpacing: AppTextStyle.letterSpacing,
+                          ),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),
@@ -99,12 +113,17 @@ class NewsListWidget extends StatelessWidget {
                       ),
                       Text(
                         DateFormat('dd-MM-yyyy').format(DateTime.parse(publishedDate))
-                        , style: CustomTextStyle.timeStyle,),
+                        ,    style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+                        fontFamily: AppTextStyle.poppinsRegular,
+                        fontSize: AppTextStyle.textFontSize13,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: AppTextStyle.letterSpacing,
+                      ),),
                     ],
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.more_horiz, color: ColorsConfig.colorGray,),
+                  icon: const Icon(Icons.more_horiz, ),
                   onPressed: (){
                     debugPrint("Share Link : $newsLink");
                     Share.share(newsLink, subject: "Today's News");
