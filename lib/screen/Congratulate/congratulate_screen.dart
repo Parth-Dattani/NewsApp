@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/congratulate_controller.dart';
 import 'package:news_app/screen/Home/home_screen.dart';
-
 import '../../constant/constant.dart';
 import '../../widgets/widgets.dart';
 
 class CongratulateScreen extends GetView<CongratulateController>{
   static const pageId = "/CongratulateScreen";
+
+  const CongratulateScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

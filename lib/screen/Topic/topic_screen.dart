@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/controller.dart';
 import 'package:news_app/screen/Congratulate/congratulate_screen.dart';
-import 'package:news_app/screen/Home/home_screen.dart';
 import '../../constant/constant.dart';
 import '../../widgets/widgets.dart';
 
@@ -53,7 +52,7 @@ class TopicScreen extends GetView<TopicController> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: Get.height * 0.12,
+        height: 100,
         decoration: const BoxDecoration(
           color: ColorsConfig.colorWhite,
           border: Border(
@@ -105,7 +104,7 @@ class TopicScreen extends GetView<TopicController> {
             backgroundColor:  ColorsConfig.colorWhite,
             onSelected: (bool selected) {
               controller.isSelected.value = true;
-              controller.selectedIndex.value = (selected ? index : -1);
+              controller.selectedIndex.value = (selected ? index : 0);
               controller.selectedTopic.value = controller.topicList[index];
               debugPrint("object : ${controller.selectedTopic.value }");
             },
@@ -115,7 +114,6 @@ class TopicScreen extends GetView<TopicController> {
                 side: const BorderSide(
                     color: ColorsConfig.colorBlue,
                     width: 2.0)),
-
           ),
         );
       }),

@@ -10,7 +10,7 @@ class TopicController extends BaseController{
   final TextEditingController searchController = TextEditingController();
   RxBool isSelected = false.obs;
   RxInt selectedIndex = 0.obs;
-  RxString selectedTopic = ''.obs;
+  RxString selectedTopic = 'National'.obs;
   final auth = FirebaseAuth.instance;
   get user => auth.currentUser;
   RxString country = ''.obs;

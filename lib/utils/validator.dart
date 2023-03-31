@@ -2,14 +2,14 @@ import 'package:get/get.dart';
 import 'package:news_app/controller/controller.dart';
 
 class Validator {
-  static final controller = Get.find<LoginController>();
+  static final controller = Get.find<BaseController>();
 
   static String? isEmail(email) {
     if (email.toString().trim().isEmpty) {
-      controller.emailFIllColor.value = true;
+      //controller.emailFIllColor.value = true;
       return 'please_enter_email'.tr;
     }
-    controller.emailFIllColor.value = false;
+    //controller.emailFIllColor.value = false;
     return null;
   }
 
@@ -39,7 +39,7 @@ class Validator {
       controller.passFIllColor.value = true;
       return 'please_enter_password'.tr;
     }
-    controller.passFIllColor.value = false;
+    //controller.passFIllColor.value = false;
     return null;
   }
 

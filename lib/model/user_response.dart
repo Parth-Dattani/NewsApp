@@ -3,12 +3,24 @@ class UserResponse{
   String? uid;
   String? country;
   String? topic;
+  String? profile;
+  String? userName;
+  String? fullName;
+  String? phone;
+  String? bio;
+  String? website;
 
   UserResponse({
     this.email,
     this.uid,
     this.country,
-    this.topic
+    this.topic,
+    this.profile,
+    this.userName,
+    this.fullName,
+    this.phone,
+    this.bio,
+    this.website,
   });
 
 
@@ -17,6 +29,12 @@ class UserResponse{
     uid = json['uid'];
     country = json['country'];
     topic = json['topic'];
+    profile = json['profile'];
+    userName = json['userName'];
+    fullName = json['fullName'];
+    phone = json['phone'];
+    bio = json['bio'];
+    website = json['website'];
   }
 
   Map<String, dynamic> toMap(){
@@ -25,6 +43,12 @@ class UserResponse{
       'uid': uid,
       'country': country,
       'topic': topic,
+      'profile': profile,
+      'userName': userName,
+      'fullName': fullName,
+      'phone': phone,
+      'bio': bio,
+      'website': website,
     };
   }
 

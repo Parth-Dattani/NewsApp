@@ -16,9 +16,7 @@ class SignUpController extends BaseController{
   final GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
 
   RxBool hidePassword = true.obs;
-  // RxBool emailFIllColor = true.obs;
-  // RxBool passFIllColor = true.obs;
-
+  RxString profileImage = 'ImagePath.profileIcon.toString()'.obs;
   RxBool isRemember = false.obs;
   final auth = FirebaseAuth.instance;
   get user => auth.currentUser;
@@ -33,7 +31,6 @@ class SignUpController extends BaseController{
         sharedPreferencesHelper.storePrefData(email, emailController.text);
         sharedPreferencesHelper.storePrefData(password, passwordController.text);
         sharedPreferencesHelper.storeBoolPrefData('isLogin', true);
-        //Get.offAndToNamed(HomeScreen.pageId);
       }else {
         sharedPreferencesHelper.storeBoolPrefData('isLogin', false);
       }
@@ -44,14 +41,6 @@ class SignUpController extends BaseController{
         snackStyle: SnackStyle.FLOATING,
         duration: const Duration(seconds: 2),);
     });
-
-    /*if (user != null) {
-      print("user ss");
-      // final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      // sharedPreferences.setString('email', email,);
-      // sharedPreferences.setString('password', password);
-    //  Get.offAndToNamed(HomeScreen.pageId);
-    }*/
     loader.value = false;
   }
 
@@ -61,7 +50,7 @@ class SignUpController extends BaseController{
         .signInWithCredential(googleAuth)
         .whenComplete(()async {
 
-        sendDataFirestore(auth.currentUser!.email.toString(),);
+        sendDataFirestore(auth.currentUser!.email.toString());
         if (isRemember.value == true ) {
           sharedPreferencesHelper.storePrefData('email', emailController.text);
           sharedPreferencesHelper.storePrefData('password', passwordController.text);
@@ -74,7 +63,6 @@ class SignUpController extends BaseController{
         }
     );
     debugPrint("auth: $auth");
-    //await Get.toNamed(HomeScreen.pageId);
   }
 
 
@@ -88,5 +76,10 @@ class SignUpController extends BaseController{
         .collection("users")
         .doc(user.uid)
         .set(userData.toMap());
+  }
+
+  void clearController() {
+    emailController.clear();
+    passwordController.clear();
   }
 }

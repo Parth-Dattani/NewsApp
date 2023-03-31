@@ -68,8 +68,6 @@ class CountryScreen extends GetView<CountryController> {
                                       controller.countryList[index].name!;
                                 },
                                 selected: controller.isSelected.value,
-                                //leading: Image.asset("${controller.jsonList[0]['flagUri']}"),
-                                //leading: Text(controller.jsonList[index]['dial_code']),
                                 title: Text(
                                   controller.countryList[index].name.toString(),
                                   style: TextStyle(
@@ -89,7 +87,7 @@ class CountryScreen extends GetView<CountryController> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: Get.height * 0.12,
+        height: 100,
         decoration: const BoxDecoration(
           color: ColorsConfig.colorWhite,
           border: Border(
@@ -107,7 +105,6 @@ class CountryScreen extends GetView<CountryController> {
           name: 'next'.tr,
           color: ColorsConfig.colorBlue,
           textStyle: CustomTextStyle.buttonStyle,
-          //minWidth: 200,
           borderRadius: 6,
           border: false,
           onPress: () {

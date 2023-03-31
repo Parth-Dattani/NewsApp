@@ -22,4 +22,5 @@ mixin ImagePath {
   static String closeIcon = 'assets/images/close.png';
   static String checkIcon = 'assets/images/check.png';
   static String cameraIcon = 'assets/images/camera.png';
+  static String userImage = 'assets/images/userImage.png';
 }

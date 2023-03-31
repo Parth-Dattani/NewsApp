@@ -105,8 +105,9 @@ class SignUpScreen extends GetView<SignUpController>{
                                         if(controller.signUpFormKey.currentState!.validate()){
                                           controller.signUp(controller.emailController.text, controller.passwordController.text);                                        }
                                         else{
-                                          print("inValid");
+                                          debugPrint("inValid");
                                         }
+                                        controller.clearController();
                                       },
                                     ),
                                   ],

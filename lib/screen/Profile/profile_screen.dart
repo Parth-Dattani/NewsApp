@@ -137,7 +137,7 @@ class ProfileScreen extends GetView<ProfileController> {
                       // FocusScope.of(context).unfocus();
                        Get.toNamed(EditProfileScreen.pageId,
                          arguments: {
-                           'editProfile': controller.isEdit.value = false,
+                           'editProfile': controller.isEdit.value = true,
                          }
                        );
 

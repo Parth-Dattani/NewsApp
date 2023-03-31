@@ -12,7 +12,7 @@ class CountryController extends BaseController {
   final TextEditingController searchController = TextEditingController();
   RxBool isSelected = false.obs;
   RxInt selectedIndex = 0.obs;
-  RxString selectedCountry = ''.obs;
+  RxString selectedCountry = 'Canada'.obs;
 
   List<Map> jsonList = <Map>[];
   RxList<CountryCode> countryList = <CountryCode>[].obs;
@@ -97,5 +97,4 @@ class CountryController extends BaseController {
         .doc(user.uid)
         .set(userData.toMap());
   }
-
 }

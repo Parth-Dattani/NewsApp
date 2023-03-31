@@ -55,7 +55,7 @@ class LoginScreen extends GetView<LoginController>{
                                           onPressed: (){},
                                         ),
                                       //fillColors: Validator.isEmail.toString() == 'please_enter_email'.tr ? true : false ,
-                                      fillColors: controller.emailFIllColor.value,
+                                      //fillColors: controller.emailFIllColor.value,
                                       // filled: Validator.isEmail.toString() == '' ? true : false,
                                       ),
 
@@ -135,22 +135,14 @@ class LoginScreen extends GetView<LoginController>{
                                     padding: const EdgeInsets.symmetric(vertical: 12),
                                     onPress: (){
                                       FocusScope.of(context).unfocus();
-                                      if(controller.loginForm.currentState!.validate()){
-                                        print("valid");
-                                        controller.login(controller.emailController.text, controller.passwordController.text);
 
+                                      if(controller.loginForm.currentState!.validate()){
+                                        controller.login(controller.emailController.text, controller.passwordController.text);
                                       }
                                       else{
-                                      // if(Validator.isEmail.toString() == 'Please Enter Email'){
-                                      //controller.emailFIllColor.value = true;
-                                      print("inValid ${Validator.isEmail.toString()}");
-
-
-                                      //controller.passFIllColor.value = true;
-                                      // controller.errorSuffix.value = false;
-                                      // }
-                                      print("esl;es");
+                                      debugPrint("inValid ${Validator.isEmail.toString()}");
                                       }
+                                      controller.clearController();
                                     },
                                   ),
                                 ],

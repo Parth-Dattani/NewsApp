@@ -4,4 +4,6 @@ abstract class BaseController extends GetxController {
 
   RxBool loader = false.obs;
   RxBool isEdit = false.obs;
+  RxBool passFIllColor = false.obs;
+  RxBool emailFIllColor = false.obs;
 }

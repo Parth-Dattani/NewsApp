@@ -17,8 +17,8 @@ class LoginController extends BaseController{
   final auth = FirebaseAuth.instance;
 
   final GlobalKey<FormState> loginForm = GlobalKey<FormState>();
-  RxBool emailFIllColor = true.obs;
-  RxBool passFIllColor = true.obs;
+  //RxBool emailFIllColor = true.obs;
+  //RxBool passFIllColor = false.obs;
   RxBool hidePassword = true.obs;
   RxBool isRemember = false.obs;
 
@@ -65,9 +65,15 @@ class LoginController extends BaseController{
     UserResponse userData = UserResponse();
     userData.email = email;
     userData.uid = user!.uid;
+    userData.profile = ImagePath.profileIcon.toString();
     await firebaseFireStore
         .collection("users")
         .doc(user.uid)
         .set(userData.toMap());
+  }
+
+  void clearController() {
+    emailController.clear();
+    passwordController.clear();
   }
 }

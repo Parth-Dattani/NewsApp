@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,10 @@ class ProfileController extends BaseController
 
   RxList<SelectDrawer> drawerItems = RxList<SelectDrawer>();
   RxBool isDark = false.obs;
-
+  QuerySnapshot? dataStream;
+  final auth = FirebaseAuth.instance;
+  get user => auth.currentUser;
+  RxList<UserResponse> userData = <UserResponse>[].obs;
   //Future<SharedPreferences> prefs = SharedPreferences.getInstance();
 
   @override
@@ -42,6 +46,27 @@ class ProfileController extends BaseController
     isDark.value = (await isLight);
     Get.changeThemeMode(isDark.value ? ThemeMode.dark : ThemeMode.light);
    }
+
+  Future<void> getData() async {
+    dataStream = await FirebaseFirestore.instance.collection('users').get();
+    //userData.clear();
+    for (var data in dataStream!.docs) {
+      userData.add(UserResponse(
+        country: data["country"],
+        email: data["email"],
+        profile: data["profile"],
+        topic: data["topic"],
+        uid: data["uid"],
+      ));
+      // userId.value = user!.uid;
+      // country.value = userData[0].country!;
+      // emailController.text = user!.email.toString();
+      //userNameController.text = user!.displayName.toString();
+      // topic.value = userData[3].topic!;
+      print("User Email :=> ${user!.email}");
+    }
+    loader.value = false;
+  }
 
   void getNews() async {
     try {
