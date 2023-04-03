@@ -19,7 +19,6 @@ class DetailScreen extends GetView<DetailController> {
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        backgroundColor: ColorsConfig.colorWhite,
         appBar: CommonAppBar(
           leadingIcon: ImagePath.arrowBack,
           actionIcon: ImagePath.shareIcon,
@@ -60,7 +59,12 @@ class DetailScreen extends GetView<DetailController> {
                             width: Get.width*0.45,
                             child: Text(
                               controller.byLine.value,
-                              style: CustomTextStyle.appBarText,
+                              style:
+                              Theme.of(context).textTheme.displaySmall!.copyWith(
+                                fontFamily: AppTextStyle.poppinsRegular,
+                                fontSize: AppTextStyle.textFontSize16,
+                                fontWeight: FontWeight.w600,
+                              ),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                             ),
@@ -68,7 +72,12 @@ class DetailScreen extends GetView<DetailController> {
                           Text(
                             DateFormat('dd-MM-yyyy').format(
                                 DateTime.parse(controller.publishedDate.value)),
-                            style: CustomTextStyle.hintTextStyle,
+                            style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+                              color: ColorsConfig.colorHintGrey,
+                              fontFamily: AppTextStyle.poppinsRegular,
+                              fontSize: AppTextStyle.textFontSize14,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ],
                       ),
@@ -126,14 +135,23 @@ class DetailScreen extends GetView<DetailController> {
                   ),
                   Text(
                     controller.title.value,
-                    style: CustomTextStyle.headLineStyle,
+                      style:  Theme.of(context).textTheme.displayMedium!.copyWith(
+                          fontFamily: AppTextStyle.poppinsBold,
+                          fontSize: AppTextStyle.textFontSize24,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: AppTextStyle.letterSpacing
+                      ),
                   ),
                   const SizedBox(
                     height: 5,
                   ),
                   Text(
                     controller.abstract.value,
-                    style: CustomTextStyle.newsHeadLineText,
+                    style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+                      fontFamily: AppTextStyle.poppinsRegular,
+                      fontSize: AppTextStyle.textFontSize16,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ],
               ),
@@ -142,11 +160,11 @@ class DetailScreen extends GetView<DetailController> {
         ),
         bottomNavigationBar: Container(
           height: Get.height * 0.1,
-          decoration: const BoxDecoration(
-            color: ColorsConfig.colorWhite,
-            border: Border(
+          decoration:  BoxDecoration(
+            color: Theme.of(context).brightness == Brightness.light?  ColorsConfig.colorWhite : ColorsConfig.colorBlack,
+            border: const Border(
                 top: BorderSide(color: ColorsConfig.colorLightGrey, width: 1)),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Color.fromRGBO(0, 0, 0, 0.05),
                 blurRadius: 4,
@@ -163,13 +181,18 @@ class DetailScreen extends GetView<DetailController> {
               ),
               Text(
                 "24.k",
-                style: CustomTextStyle.newsHeadLineText,
+                style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+                  fontFamily: AppTextStyle.poppinsRegular,
+                  fontSize: AppTextStyle.textFontSize16,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
               const SizedBox(
                 width: 30,
               ),
               Image.asset(
                 ImagePath.commentIcon,
+                color: Theme.of(context).brightness == Brightness.light ? ColorsConfig.colorBlack : ColorsConfig.colorDarkGray,
                 scale: 20,
               ),
               const SizedBox(
@@ -177,7 +200,11 @@ class DetailScreen extends GetView<DetailController> {
               ),
               Text(
                 "1K",
-                style: CustomTextStyle.newsHeadLineText,
+                style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+                  fontFamily: AppTextStyle.poppinsRegular,
+                  fontSize: AppTextStyle.textFontSize16,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
               const Spacer(),
               Obx(

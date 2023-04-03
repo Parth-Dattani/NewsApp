@@ -15,7 +15,6 @@ class BookDetailScreen extends GetView<BookDetailController>{
     return Obx(
       ()=> CommonLoader(
         isLoad: controller.loader.value,
-
         body: Scaffold(
           body: SafeArea(
             child: SingleChildScrollView(
@@ -24,7 +23,13 @@ class BookDetailScreen extends GetView<BookDetailController>{
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("books".tr, style: CustomTextStyle.titleHeadStyle,),
+                    Text("books".tr,
+                        style:  Theme.of(context).textTheme.displayLarge!.copyWith(
+                          fontFamily: AppTextStyle.poppinsBold,
+                          fontSize: AppTextStyle.textFontSize32,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: AppTextStyle.letterSpacing,
+                        )),
                     const SizedBox(height: 15,),
                     Obx(
                       ()=> GridView.builder(
@@ -36,31 +41,6 @@ class BookDetailScreen extends GetView<BookDetailController>{
                               return GestureDetector(
                                 onTap: () async {
                                   launchUrlStart(url: controller.bookDetailsList[index].amazonProductUrl.toString(),);
-                                  // Get.toNamed(DetailScreen.pageId,
-                                  //     arguments: {
-                                  //       'section': controller
-                                  //           .bookDetailsList[index].title
-                                  //           .toString(),
-                                  //       'title': controller.bookDetailsList[index]
-                                  //           .title.toString(),
-                                  //       'byLine': controller
-                                  //           .bookDetailsList[index].description !=
-                                  //           null
-                                  //           ? controller.bookDetailsList[index]
-                                  //           .author!.toString()
-                                  //           : '',
-                                  //       'publishedDate': controller
-                                  //           .bookDetailsList[index].price
-                                  //           .toString(),
-                                  //       'image': controller.bookDetailsList[index]
-                                  //           .bookImage != null ?
-                                  //       controller.bookDetailsList[index]
-                                  //           .bookImage
-                                  //           .toString() : '',
-                                  //       'abstract': controller
-                                  //           .bookDetailsList[index].author
-                                  //           .toString()
-                                  //     });
                                 },
                                 child: Column(children: [
                                   SizedBox(
@@ -96,18 +76,27 @@ class BookDetailScreen extends GetView<BookDetailController>{
                                       children: [
                                         Text(
                                           controller.bookDetailsList[index].title.toString(),
-                                          style: CustomTextStyle.appBarText,
+                                          style:  Theme.of(context).textTheme.displayMedium!.copyWith(
+                                            fontFamily: AppTextStyle.poppinsRegular,
+                                            fontSize: AppTextStyle.textFontSize16,
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                           overflow: TextOverflow.visible,
                                           maxLines: 1,
                                         ),
                                         Text(
                                            controller.bookDetailsList[index].description.toString(),
-                                          style: CustomTextStyle.labelStyle,
+                                          style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+                                            fontFamily: AppTextStyle.poppinsRegular,
+                                            fontSize: AppTextStyle.textFontSize14,
+                                            fontWeight: FontWeight.w400,
+                                            letterSpacing: AppTextStyle.letterSpacing,
+                                          ),
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 2,
                                         ),
-                                        dataList("Author", controller.bookDetailsList[index].author.toString()),
-                                        dataList("Price", controller.bookDetailsList[index].price.toString()),
+                                        dataList("Author", controller.bookDetailsList[index].author.toString(), context),
+                                        dataList("Price", controller.bookDetailsList[index].price.toString(), context),
                                       ],
                                     ),
                                   ),
@@ -142,7 +131,7 @@ class BookDetailScreen extends GetView<BookDetailController>{
     }
   }
 
-  Widget dataList(title, subTitle) {
+  Widget dataList(title, subTitle, context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -155,13 +144,19 @@ class BookDetailScreen extends GetView<BookDetailController>{
                 style: CustomTextStyle.appBarText),
           ),
         ),
+        const Text(" : "),
         Expanded(
           child: Text(
             subTitle,
             textAlign: TextAlign.left,
             overflow: TextOverflow.clip,
             maxLines: 1,
-            style: CustomTextStyle.labelStyle,
+            style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+              fontFamily: AppTextStyle.poppinsRegular,
+              fontSize: AppTextStyle.textFontSize14,
+              fontWeight: FontWeight.w400,
+              letterSpacing: AppTextStyle.letterSpacing,
+            ),
           ),
         ),
       ],

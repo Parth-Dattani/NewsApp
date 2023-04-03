@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/constant/constant.dart';
@@ -33,7 +34,7 @@ class EditProfileScreen extends GetView<EditProfileController>{
             child: Column(
                 children: [
                   Form(
-                      key: controller.formKey,
+                      key: controller.editProfileformKey,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 25.0, right: 25, top: 10),
                         child: Column(
@@ -42,24 +43,54 @@ class EditProfileScreen extends GetView<EditProfileController>{
                               color: Colors.white,
                               child: Stack(
                                 children: <Widget>[
-                                  Container(
-                                      width: Get.width * 0.30,
-                                      height: Get.height * 0.19,
-                                      decoration: const BoxDecoration(shape: BoxShape.circle,),
-                                      child: CircleAvatar(
-                                        child:
-                                           ClipRRect(
-                                              borderRadius:
-                                              const BorderRadius.all(Radius.zero),
-                                              child: controller.isEdit.value == true ?
-                                                controller.pickedImage.value == null ?
-                                                Image.asset(ImagePath.profileIcon, fit: BoxFit.fill, height: Get.height * 0.19, width: Get.width * 0.30) :
-                                                Image.file(File(controller.pickedImage.value!.path), fit: BoxFit.fill,height: Get.height * 0.19, width: Get.width * 0.30)
-                                        //     : controller.pickedImage.value != null
-                                        // ? Image.file(File(controller.pickedImage.value!.path), fit: BoxFit.fill,)
-                                            :  Image.asset(ImagePath.userImage, fit: BoxFit.fill,)))),
+                                  CircleAvatar(
+                                    radius: 60,
+                                    child:
+                                       ClipRRect(
+                                          child: controller.isEdit.value == true ?
+                                            controller.pickedImage.value == null ?
+                                                CachedNetworkImage(
+                                                  imageUrl:  controller.imageUrl.value,
+                                                  imageBuilder: (context, imageProvider) => Container(
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      image: DecorationImage(
+                                                        image: imageProvider,
+                                                        fit: BoxFit.cover,),
+                                                    ),
+                                                  ),
+                                                  placeholder: (context, url) => Transform.scale(
+                                                    scale: 0.5,
+                                                    child: const CircularProgressIndicator(
+                                                      backgroundColor: ColorsConfig.colorRed,
+                                                      strokeWidth: 3,
+                                                    ),
+                                                  ),
+                                                  errorWidget: (context, url, error) => const Icon(Icons.error, color: Colors.red,),
+                                                )
+                                            :
+
+                                            Image.file(File(controller.pickedImage.value!.path),
+                                                fit: BoxFit.fill,height: Get.height * 0.19, width: Get.width * 0.30)
+                                     //     :
+                                     //      controller.pickedImage.value != null
+                                     // ? CachedNetworkImage(
+                                     //        imageUrl: controller.pickedImage.value!.path,
+                                     //        imageBuilder: (context, imageProvider) => Container(
+                                     //          decoration: BoxDecoration(
+                                     //            shape: BoxShape.circle,
+                                     //            image: DecorationImage(
+                                     //              image: imageProvider,
+                                     //              fit: BoxFit.cover,),
+                                     //          ),
+                                     //        ),
+                                     //      )
+                                          // Image.file(File(controller.pickedImage.value!.path), fit: BoxFit.fill,)
+                                        : CachedNetworkImage(imageUrl: ImagePath.userImage)
+                                          //Image.asset(ImagePath.userImage, fit: BoxFit.fill,)
+                                         )),
                                   Positioned(
-                                      bottom: 15,top: 100, left: 70,
+                                      bottom: 10,top: 90, left: 80,
                                       child: Padding(
                                         padding: controller.isUpload.value == true &&
                                             controller.imageUrl.value.isEmpty

@@ -43,7 +43,7 @@ class CommonTextField extends StatelessWidget {
         suffixIcon: suffixIcon,
 
         filled: filled,
-        fillColor: fillColors ==  true ? ColorsConfig.colorLightRed : ColorsConfig.colorTransfer,
+        //fillColor: Theme.of(context).brightness == Brightness.dark ? ColorsConfig.colorLightGrey : ColorsConfig.colorTransfer,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),

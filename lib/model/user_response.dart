@@ -6,7 +6,7 @@ class UserResponse{
   String? profile;
   String? userName;
   String? fullName;
-  String? phone;
+  int? phone;
   String? bio;
   String? website;
 

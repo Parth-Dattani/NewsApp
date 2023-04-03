@@ -16,7 +16,7 @@ class EditProfileController extends BaseController {
   TextEditingController bioController = TextEditingController();
   TextEditingController websiteController = TextEditingController();
 
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> editProfileformKey = GlobalKey<FormState>();
 
   final ImagePicker imagePicker = ImagePicker();
   final pickedImage = Rxn<XFile>();
@@ -49,10 +49,11 @@ class EditProfileController extends BaseController {
       if(auth.currentUser!.uid == data['uid']){
         userId.value = data['uid'];
         country.value = data['country'];
+        imageUrl.value = data['profile'].toString() ?? '';
         emailController.text = data['email'].toString();
         userNameController.text = data['userName'].toString() ?? '';
         fullNameController.text = data['fullName'].toString() ?? '';
-
+        phoneController.text =  data['phone'].toString() ?? '';
         topic.value = data["topic"];
         bioController.text = data["bio"] ?? '';
         websiteController.text = data["website"] ?? '';
@@ -62,8 +63,7 @@ class EditProfileController extends BaseController {
   }
 
   Future selectImage() async {
-    pickedImage.value =
-        await imagePicker.pickImage(source: ImageSource.gallery);
+    pickedImage.value = await imagePicker.pickImage(source: ImageSource.gallery);
 
     imageUrl.value = pickedImage.value!.path;
     isUpload.value = false;
@@ -73,20 +73,18 @@ class EditProfileController extends BaseController {
     loader.value = true;
     final path = 'userImage/${user!.uid}';
     final file = File(pickedImage.value!.path);
-    debugPrint("File $file");
 
     final ref = FirebaseStorage.instance.ref().child(path);
     await ref.putFile(file);
 
     imageUrl.value = await ref.getDownloadURL();
-    debugPrint("download Url : $imageUrl.value");
     loader.value = false;
     isUpload.value = false;
   }
 
   Future updateProfile() async {
-    formKey.currentState!.save();
-    if (formKey.currentState!.validate()) {
+    editProfileformKey.currentState!.save();
+    if (editProfileformKey.currentState!.validate()) {
       loader.value = true;
       debugPrint("upload URll -=> ${imageUrl.value.toString()}");
       await uploadImage();
@@ -94,20 +92,18 @@ class EditProfileController extends BaseController {
           UserResponse(
               country: country.value,
               email: user!.email,
-              profile: imageUrl.value.toString(),
+              profile: imageUrl.value,
               topic: topic.value.toString(),
               uid: userId.value,
             userName:userNameController.value.text,
             fullName: fullNameController.value.text,
-            phone: phoneController.value.text,
+            phone: int.parse(phoneController.value.text),
             bio: bioController.value.text,
             website: websiteController.value.text
-          )
-              .toMap());
-      Future.delayed(const Duration(seconds: 5), () {
-        Get.back();
-        loader.value = false;
-      });
+          ).toMap());
+                Get.back();
+
+      loader.value = false;
     }
   }
 }

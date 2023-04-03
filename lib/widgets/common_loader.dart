@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import 'package:flutter/material.dart';
-
 import '../constant/constant.dart';
 
 class CommonLoader extends StatelessWidget {
@@ -17,7 +13,8 @@ class CommonLoader extends StatelessWidget {
         body,
         isLoad ? const Opacity(
             opacity: 0.8,
-            child: ModalBarrier(dismissible: false, color: ColorsConfig.colorLightGrey))
+            child: ModalBarrier(dismissible: false, color:
+            ColorsConfig.colorLightGrey))
             : const SizedBox(),
 
         isLoad ? const Center(

@@ -57,6 +57,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget{
         child: leadingIcon != null
             ? Image.asset(
           leadingIcon!,
+          color: Theme.of(context).brightness == Brightness.light ? ColorsConfig.colorGray : ColorsConfig.colorDarkGray,
           scale: iconSize ??  25.0,
         )
             : Container(),
@@ -72,7 +73,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget{
               },
               child: actionIcon != null ?
               Image.asset(actionIcon!, scale: actionIconSize ??  25.0,
-              color: Theme.of(context).brightness == Brightness.light? ColorsConfig.colorBlack : ColorsConfig.colorWhite,
+                color: Theme.of(context).brightness == Brightness.light ? ColorsConfig.colorGray : ColorsConfig.colorDarkGray,
               ) : Container()
 
             ) ,
@@ -84,7 +85,9 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget{
                       //Get.back();
                     },
                     child: actionIcon2 != null ? Container(
-                        child: Image.asset(actionIcon2!, scale: actionIconSize2 ??  25.0,)): Container()
+                        child: Image.asset(actionIcon2!,
+                          color: Theme.of(context).brightness == Brightness.light ? ColorsConfig.colorGray : ColorsConfig.colorDarkGray,
+                          scale: actionIconSize2 ??  25.0,)): Container()
     ))],
         ),
         const SizedBox(width: 10,),

@@ -21,13 +21,20 @@ class ProfileController extends BaseController
   get user => auth.currentUser;
   RxList<UserResponse> userData = <UserResponse>[].obs;
   //Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+  RxString userName = "".obs;
+  RxString userId = "".obs;
+  RxString bio = ''.obs;
+  RxString website = ''.obs;
+  RxString imageUrl = ''.obs;
 
   @override
   void onInit()async {
-    super.onInit();
+    getData();
     initDrawerList();
     getNews();
     isDark.value = await sharedPreferencesHelper.retrievePrefBoolData('theme');
+    super.onInit();
+
   }
 
   RxList<Results> resultDataList = <Results>[].obs;
@@ -44,8 +51,25 @@ class ProfileController extends BaseController
    }
 
   Future<void> getData() async {
+    loader.value = true;
     dataStream = await FirebaseFirestore.instance.collection('users').get();
-    //userData.clear();
+    userData.clear();
+    for (var data in dataStream!.docs) {
+
+      if(auth.currentUser!.uid == data['uid']){
+        userId.value = data['uid'];
+        userName.value = data['userName'].toString();
+        bio.value = data["bio"] ?? '';
+       imageUrl.value = data['profile'];
+
+      }
+    }
+    loader.value = false;
+  }
+
+ /* Future<void> getData() async {
+    dataStream = await FirebaseFirestore.instance.collection('users').get();
+    userData.clear();
     for (var data in dataStream!.docs) {
       userData.add(UserResponse(
         country: data["country"],
@@ -53,10 +77,14 @@ class ProfileController extends BaseController
         profile: data["profile"],
         topic: data["topic"],
         uid: data["uid"],
+        userName: data["userName"]
       ));
+      userName.value = data["userName"];
     }
+
     loader.value = false;
-  }
+  }*/
+
 
   void getNews() async {
     try {

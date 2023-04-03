@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/controller.dart';
@@ -13,266 +14,293 @@ class ProfileScreen extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: controller.scaffoldKey,
-      //drawerEnableOpenDragGesture: false,
-      appBar: CommonAppBar(
-        title: 'profile'.tr,
-        actionIcon: ImagePath.settingIcon,
-        actionOnTap: () {
-          debugPrint("TAp");
-          Scaffold.of(context).openDrawer();
-          controller.scaffoldKey.currentState!.isDrawerOpen;
-          controller.scaffoldKey.currentState!.openEndDrawer();
-        },
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding:
-              const EdgeInsets.only(top: 15, left: 24, bottom: 15, right: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Obx(
+      ()=> CommonLoader(
+        isLoad: controller.loader.value,
+        body: Scaffold(
+          key: controller.scaffoldKey,
+          //drawerEnableOpenDragGesture: false,
+          appBar: CommonAppBar(
+            title: 'profile'.tr,
+            actionIcon: ImagePath.settingIcon,
+            actionOnTap: () {
+              debugPrint("TAp");
+              Scaffold.of(context).openDrawer();
+              controller.scaffoldKey.currentState?.isDrawerOpen;
+              controller.scaffoldKey.currentState?.openEndDrawer();
+            },
+          ),
+          body: SafeArea(
+            child: Padding(
+              padding:
+                  const EdgeInsets.only(top: 15, left: 24, bottom: 15, right: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CircleAvatar(
-                    minRadius: 40,
-                    backgroundImage: AssetImage(
-                      ImagePath.bbcNewsIcon,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CircleAvatar(
+                        radius: 60,
+                        child: CachedNetworkImage(
+                          imageUrl:  controller.imageUrl.toString(),
+                          imageBuilder: (context, imageProvider) => Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,),
+                            ),
+                          ),
+                          placeholder: (context, url) => Transform.scale(
+                            scale: 0.5,
+                            child: const CircularProgressIndicator(
+                              backgroundColor: ColorsConfig.colorRed,
+                              strokeWidth: 3,
+                            ),
+                          ),
+                          errorWidget: (context, url, error) => const Icon(Icons.error, color: Colors.red,),
+                        ),
+                      ),
+                      // CircleAvatar(
+                      //   radius: 60,
+                      //   backgroundImage: NetworkImage(controller.imageUrl.value.toString()),
+                      // ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        children: [
+                          Text("2150", style: CustomTextStyle.appBarText),
+                          Text("followers".tr,
+                          style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                            fontFamily: AppTextStyle.poppinsRegular,
+                            fontSize: AppTextStyle.textFontSize16,
+                            fontWeight: FontWeight.w400,
+                            letterSpacing: AppTextStyle.letterSpacing3,
+                          ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        children: [
+                          Text("50", style: CustomTextStyle.appBarText),
+                          Text("following".tr,
+                            style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                              fontFamily: AppTextStyle.poppinsRegular,
+                              fontSize: AppTextStyle.textFontSize16,
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: AppTextStyle.letterSpacing3,
+                            ),)
+                        ],
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Column(
+                        children: [
+                          Text("2150",
+                            style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                              fontFamily: AppTextStyle.poppinsRegular,
+                              fontSize: AppTextStyle.textFontSize16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            "news".tr,
+                            style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                              fontFamily: AppTextStyle.poppinsRegular,
+                              fontSize: AppTextStyle.textFontSize16,
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: AppTextStyle.letterSpacing3,
+                            ),
+                          )
+                        ],
+                      )
+                    ],
                   ),
                   const SizedBox(
-                    width: 10,
+                    height: 15,
                   ),
-                  Column(
-                    children: [
-                      Text("2150", style: CustomTextStyle.appBarText),
-                      Text("followers".tr,
-                      style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                  Text(
+                    controller.userName.value,
+                      style:  Theme.of(context).textTheme.displayMedium!.copyWith(
+                        fontFamily: AppTextStyle.poppinsRegular,
+                        fontSize: AppTextStyle.textFontSize16,
+                        fontWeight: FontWeight.w600,
+                      )
+                  ),
+                  Text(
+                    controller.bio.value,
+                      style:  Theme.of(context).textTheme.displaySmall!.copyWith(
                         fontFamily: AppTextStyle.poppinsRegular,
                         fontSize: AppTextStyle.textFontSize16,
                         fontWeight: FontWeight.w400,
                         letterSpacing: AppTextStyle.letterSpacing3,
-                      ),
                       )
-                    ],
                   ),
                   const SizedBox(
-                    width: 10,
+                    height: 15,
                   ),
-                  Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("50", style: CustomTextStyle.appBarText),
-                      Text("following".tr,
-                        style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                          fontFamily: AppTextStyle.poppinsRegular,
-                          fontSize: AppTextStyle.textFontSize16,
-                          fontWeight: FontWeight.w400,
-                          letterSpacing: AppTextStyle.letterSpacing3,
-                        ),)
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Column(
-                    children: [
-                      Text("2150",
-                        style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                          fontFamily: AppTextStyle.poppinsRegular,
-                          fontSize: AppTextStyle.textFontSize16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Text(
-                        "news".tr,
-                        style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                          fontFamily: AppTextStyle.poppinsRegular,
-                          fontSize: AppTextStyle.textFontSize16,
-                          fontWeight: FontWeight.w400,
-                          letterSpacing: AppTextStyle.letterSpacing3,
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Text(
-                "parth Dattani",
-                  style:  Theme.of(context).textTheme.displayMedium!.copyWith(
-                    fontFamily: AppTextStyle.poppinsRegular,
-                    fontSize: AppTextStyle.textFontSize16,
-                    fontWeight: FontWeight.w600,
-                  )
-              ),
-              Text(
-                "parth Dattani sdfijf csdkfnv kjdhjscns skfldjaf cfjdsfb",
-                  style:  Theme.of(context).textTheme.displaySmall!.copyWith(
-                    fontFamily: AppTextStyle.poppinsRegular,
-                    fontSize: AppTextStyle.textFontSize16,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: AppTextStyle.letterSpacing3,
-                  )
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CommonButton(
-                    name: 'edit_profile'.tr,
-                    color: ColorsConfig.colorBlue,
-                    textStyle: CustomTextStyle.buttonStyle,
-                    borderRadius: 6,
-                    minWidth: 70,
-                    border: false,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 10),
-                    onPress: () {
-                      // FocusScope.of(context).unfocus();
-                       Get.toNamed(EditProfileScreen.pageId,
-                         arguments: {
-                           'editProfile': controller.isEdit.value = true,
-                         }
-                       );
+                      CommonButton(
+                        name: 'edit_profile'.tr,
+                        color: ColorsConfig.colorBlue,
+                        textStyle: CustomTextStyle.buttonStyle,
+                        borderRadius: 6,
+                        minWidth: 70,
+                        border: false,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 10),
+                        onPress: () async {
+                          // FocusScope.of(context).unfocus();
+                           await Get.toNamed(EditProfileScreen.pageId,
+                             arguments: {
+                               'editProfile': controller.isEdit.value = true,
+                             }
+                           );
 
-                    },
+                           controller.getData();
+                        },
+                      ),
+                      CommonButton(
+                        name: 'website'.tr,
+                        color: ColorsConfig.colorBlue,
+                        textStyle: CustomTextStyle.buttonStyle,
+                        borderRadius: 6,
+                        //minWidth: 80,
+                        border: false,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 10),
+                        onPress: () {
+                          FocusScope.of(context).unfocus();
+                          debugPrint("cyer :${controller.imageUrl.value}");
+                        },
+                      ),
+                    ],
                   ),
-                  CommonButton(
-                    name: 'website'.tr,
-                    color: ColorsConfig.colorBlue,
-                    textStyle: CustomTextStyle.buttonStyle,
-                    borderRadius: 6,
-                    //minWidth: 80,
-                    border: false,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 10),
-                    onPress: () {
-                      FocusScope.of(context).unfocus();
-                    },
+                  const SizedBox(
+                    height: 15,
                   ),
-                ],
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                "news".tr,
-                  style:  Theme.of(context).textTheme.displaySmall!.copyWith(
-                    fontFamily: AppTextStyle.poppinsRegular,
-                    fontSize: AppTextStyle.textFontSize16,
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: AppTextStyle.letterSpacing3,
-                  )
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Expanded(
-                child: Obx(
-                  ()=> ListView.separated(
-                      shrinkWrap: true,
-                      itemCount: controller.resultDataList.length,
-                      physics: const BouncingScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            debugPrint(
-                                "dfkdshf : ${controller.resultDataList[index].section.toString()}");
-                            Get.toNamed(DetailScreen.pageId, arguments: {
-                              'section': controller.resultDataList[index].section
-                                  .toString(),
-                              'title': controller.resultDataList[index].title
-                                  .toString(),
-                              'byLine': controller
-                                      .resultDataList[index].orgFacet!.isNotEmpty
-                                  ? controller
-                                      .resultDataList[index].orgFacet!.first
-                                      .toString()
-                                  : '',
-                              'publishedDate': controller
-                                  .resultDataList[index].publishedDate
-                                  .toString(),
-                              //'image' :controller.resultDataList[index].multimedia![0].url.toString(),
-                              'image':
-                                  controller.resultDataList[index].multimedia !=
-                                          null
-                                      ? controller.resultDataList[index]
-                                          .multimedia![0].url
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "news".tr,
+                      style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+                        fontFamily: AppTextStyle.poppinsRegular,
+                        fontSize: AppTextStyle.textFontSize16,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: AppTextStyle.letterSpacing3,
+                      )
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Expanded(
+                    child: Obx(
+                      ()=> ListView.separated(
+                          shrinkWrap: true,
+                          itemCount: controller.resultDataList.length,
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                debugPrint(
+                                    "dfkdshf : ${controller.resultDataList[index].section.toString()}");
+                                Get.toNamed(DetailScreen.pageId, arguments: {
+                                  'section': controller.resultDataList[index].section
+                                      .toString(),
+                                  'title': controller.resultDataList[index].title
+                                      .toString(),
+                                  'byLine': controller
+                                          .resultDataList[index].orgFacet!.isNotEmpty
+                                      ? controller
+                                          .resultDataList[index].orgFacet!.first
                                           .toString()
                                       : '',
-                              'abstract': controller
-                                  .resultDataList[index].abstract
-                                  .toString()
-                            });
+                                  'publishedDate': controller
+                                      .resultDataList[index].publishedDate
+                                      .toString(),
+                                  //'image' :controller.resultDataList[index].multimedia![0].url.toString(),
+                                  'image':
+                                      controller.resultDataList[index].multimedia !=
+                                              null
+                                          ? controller.resultDataList[index]
+                                              .multimedia![0].url
+                                              .toString()
+                                          : '',
+                                  'abstract': controller
+                                      .resultDataList[index].abstract
+                                      .toString()
+                                });
+                              },
+                              child: NewsListWidget(
+                                section: controller.resultDataList[index].section
+                                    .toString(),
+                                title:
+                                    controller.resultDataList[index].title.toString(),
+                                byLine: controller
+                                        .resultDataList[index].orgFacet!.isNotEmpty
+                                    ? controller.resultDataList[index].orgFacet!.first
+                                        .toString()
+                                    : '',
+                                publishedDate: controller
+                                    .resultDataList[index].publishedDate
+                                    .toString(),
+                                newsLink:
+                                    controller.resultDataList[index].url.toString(),
+                                image: controller
+                                        .resultDataList[index].multimedia!.isNotEmpty
+                                    ? controller
+                                        .resultDataList[index].multimedia![0].url
+                                        .toString()
+                                    : '',
+                              ),
+                            );
                           },
-                          child: NewsListWidget(
-                            section: controller.resultDataList[index].section
-                                .toString(),
-                            title:
-                                controller.resultDataList[index].title.toString(),
-                            byLine: controller
-                                    .resultDataList[index].orgFacet!.isNotEmpty
-                                ? controller.resultDataList[index].orgFacet!.first
-                                    .toString()
-                                : '',
-                            publishedDate: controller
-                                .resultDataList[index].publishedDate
-                                .toString(),
-                            newsLink:
-                                controller.resultDataList[index].url.toString(),
-                            image: controller
-                                    .resultDataList[index].multimedia!.isNotEmpty
-                                ? controller
-                                    .resultDataList[index].multimedia![0].url
-                                    .toString()
-                                : '',
-                          ),
-                        );
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return Container(height: 25.0);
-                      }),
-                ),
-              )
+                          separatorBuilder: (BuildContext context, int index) {
+                            return Container(height: 25.0);
+                          }),
+                    ),
+                  )
 
 /*               Obx(
-                 ()=> Switch(
-                    value: controller.isLightTheme.value,
-                    onChanged: (val) {
-                      controller.isLightTheme.value = val;
-                      Get.changeThemeMode(
-                        controller.isLightTheme.value ? ThemeMode.light : ThemeMode.dark,
-                      );
-                      controller.saveThemeStatus();
-                    },
-                  ),
-               ),*/
-            ],
+                     ()=> Switch(
+                        value: controller.isLightTheme.value,
+                        onChanged: (val) {
+                          controller.isLightTheme.value = val;
+                          Get.changeThemeMode(
+                            controller.isLightTheme.value ? ThemeMode.light : ThemeMode.dark,
+                          );
+                          controller.saveThemeStatus();
+                        },
+                      ),
+                   ),*/
+                ],
+              ),
+            ),
+          ),
+          endDrawer: Column(
+              children: [
+                CommonAppBar(
+                  leadingIcon: ImagePath.arrowBack,
+                title: "settings".tr,
+                ),
+                 Expanded(child: drawer())
+              ],),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: ColorsConfig.colorBlue,
+            elevation: 0,
+            child: const Icon(Icons.add),
           ),
         ),
-      ),
-      endDrawer: Column(
-          children: [
-            CommonAppBar(
-              leadingIcon: ImagePath.arrowBack,
-            title: "settings".tr,
-            ),
-             Expanded(child: drawer())
-          ],),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: ColorsConfig.colorBlue,
-        elevation: 0,
-        child: const Icon(Icons.add),
       ),
     );
   }
