@@ -16,7 +16,7 @@ class NewsScreen extends GetView<NewsController> {
     return Obx(
           ()=> CommonLoader( isLoad: controller.loader.value && controller.resultDataList.isEmpty,
         body: /*controller.resultDataList.isEmpty ? CircularProgressIndicator() :*/ Scaffold(
-          backgroundColor: ColorsConfig.colorWhite,
+          // backgroundColor: ColorsConfig.colorWhite,
           appBar: CommonAppBar(
             leadingIcon: ImagePath.appLogo,
             leadingOnTap: () {},
