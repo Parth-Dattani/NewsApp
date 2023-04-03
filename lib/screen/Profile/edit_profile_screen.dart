@@ -24,17 +24,9 @@ class EditProfileScreen extends GetView<EditProfileController>{
             title: "edit_profile".tr,
             actionIcon: ImagePath.checkIcon,
             actionOnTap: (){
-              print("EditDone");
-              // controller.loader.value = true;
               controller.isEdit.value == true
                   ? controller.updateProfile()
                   : null;
-              // if(controller.formKey.currentState!.validate()){
-              //   print("valid");
-              // }
-              // else{
-              //   print("Invalid");
-              // }
             },
           ),
           body: SafeArea(child: SingleChildScrollView(
@@ -75,9 +67,6 @@ class EditProfileScreen extends GetView<EditProfileController>{
                                             : const EdgeInsets.only(left: 12.0),
                                         child: GestureDetector(
                                           onTap: (){
-                                            print("picked ing");
-                                            print(controller.pickedImage.value !=
-                                                null);
                                             controller.selectImage();
                                           },
                                           child: Image.asset(ImagePath.cameraIcon, scale: 20,)
@@ -138,7 +127,6 @@ class EditProfileScreen extends GetView<EditProfileController>{
                               borderRadius: 10,
                             ),
                             const SizedBox(height: 30,),
-
 
                             const SizedBox(height: 50,),
                           ],

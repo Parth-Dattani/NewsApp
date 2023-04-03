@@ -5,8 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/base_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../constant/constant.dart';
 import '../model/model.dart';
 import '../screen/screen.dart';
@@ -30,9 +28,7 @@ class ProfileController extends BaseController
     initDrawerList();
     getNews();
     isDark.value = await sharedPreferencesHelper.retrievePrefBoolData('theme');
-    print("theme${isDark.value}");
   }
-
 
   RxList<Results> resultDataList = <Results>[].obs;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -58,12 +54,6 @@ class ProfileController extends BaseController
         topic: data["topic"],
         uid: data["uid"],
       ));
-      // userId.value = user!.uid;
-      // country.value = userData[0].country!;
-      // emailController.text = user!.email.toString();
-      //userNameController.text = user!.displayName.toString();
-      // topic.value = userData[3].topic!;
-      print("User Email :=> ${user!.email}");
     }
     loader.value = false;
   }
@@ -74,16 +64,13 @@ class ProfileController extends BaseController
       var response = await RemoteServices.getNews();
       if (response.statusCode == 200) {
         var jsonData = json.decode(response.body);
-
         //newsResponse.value =  NewsResponse.fromJson(jsonData);
-
         var data = jsonData['results'];
         if (data.isNotEmpty) {
           loader.value = false;
           for (var i in data) {
             resultDataList.add(Results.fromJson(i));
           }
-          //newsResponse.value = NewsResponse.fromJson(jsonData as Map<String, dynamic>);
           debugPrint("List : ${resultDataList[0].section}");
           loader.value = false;
         } else {
@@ -94,9 +81,6 @@ class ProfileController extends BaseController
       debugPrint("Error :- ${e.toString()}");
     }
   }
-
-
-
 
   initDrawerList() {
     drawerItems.add(SelectDrawer(
@@ -117,7 +101,6 @@ class ProfileController extends BaseController
             value:isDark.value,
             onChanged: (val) {
               isDark.value = val;
-              print(val);
               Get.changeThemeMode(
                 isDark.value ? ThemeMode.dark : ThemeMode.light,
               );
@@ -125,17 +108,6 @@ class ProfileController extends BaseController
               getThemeStatus(val);
              // Get.changeTheme(val);
             },
-
-            // onToggle: (value) {
-            //   controller.isDark.value = value;
-            //   print(value);
-            //   Get.changeThemeMode(controller.isDark.value
-            //       ? ThemeMode.dark
-            //       : ThemeMode.light);
-            //   controller.saveThemeStatus();
-            //    controller.changeTheme(value);
-            //   controller.status.value = value;
-            // },
           ),
         ),
         title: "dark_mode".tr, icon: Icons.nightlight_round_rounded, selected:  false

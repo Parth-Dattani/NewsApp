@@ -35,8 +35,7 @@ class BookDetailController extends BaseController{
         for (var i in data) {
           bookDetailsList.add(Books.fromJson(i));
         }
-
-        print("Book Name of Display: ${bookDetailsList[0].title}");
+        debugPrint("Book Name of Display: ${bookDetailsList[0].title}");
         loader.value = false;
       } else {
         loader.value = false;

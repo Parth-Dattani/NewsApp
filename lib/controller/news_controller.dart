@@ -66,14 +66,13 @@ class NewsController extends BaseController
             resultDataList.add(Results.fromJson(i));
           }
           //newsResponse.value = NewsResponse.fromJson(jsonData as Map<String, dynamic>);
-          print("List : ${resultDataList[0].section}");
           loader.value = false;
         } else {
           loader.value = false;
         }
       }
     } catch (e) {
-      print("Error :- ${e.toString()}");
+      debugPrint("Error :- ${e.toString()}");
     }
   }
 
@@ -84,16 +83,13 @@ class NewsController extends BaseController
       var response = await RemoteServices.getNews();
       if (response.statusCode == 200) {
         var jsonData = json.decode(response.body);
-
         //newsResponse.value =  NewsResponse.fromJson(jsonData);
-
         var data = jsonData['results'];
         if (data.isNotEmpty) {
           loader.value = false;
           for (var i in data) {
             resultDataList.add(Results.fromJson(i));
           }
-          //newsResponse.value = NewsResponse.fromJson(jsonData as Map<String, dynamic>);
           debugPrint("List : ${resultDataList[0].section}");
           loader.value = false;
         } else {

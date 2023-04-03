@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,9 +30,7 @@ class DetailScreen extends GetView<DetailController> {
           actionIcon2: ImagePath.moreIcon,
           actionIconSize2: 90,
 
-          actionOnTap2: (){
-            print("more Click");
-          },
+          actionOnTap2: (){},
         ),
         body: SafeArea(
           child: SingleChildScrollView(

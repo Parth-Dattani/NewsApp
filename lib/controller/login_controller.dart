@@ -6,7 +6,6 @@ import 'package:flutter_social_media_signin/flutter_social_media_signin.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/base_controller.dart';
 import 'package:news_app/screen/screen.dart';
-
 import '../constant/constant.dart';
 import '../model/model.dart';
 import '../utils/shared_preferences_helper.dart';

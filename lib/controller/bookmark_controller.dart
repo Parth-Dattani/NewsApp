@@ -10,7 +10,6 @@ import '../utils/utils.dart';
 class BookMarkController extends BaseController {
   @override
   void onInit() {
-    print("Book Mark Controller Init State");
     bookMark();
     super.onInit();
   }
@@ -23,12 +22,8 @@ class BookMarkController extends BaseController {
   void bookMark() async {
     var result = await sharedPreferencesHelper.retrievePrefData("bookmark_news");
     var list = jsonDecode(result);
-    print("list : $list");
-    print("list Length : ${list.length}");
     list.map((e) => bookMarkdList.add(Results.fromJson(e))).toList();
-    print("book Length : ${bookMarkdList.length}");
-    print("bookMark List Data: ${jsonEncode(bookMarkdList.toString())}");
-    print("bookMark 00: ${bookMarkdList[0].url ?? ''
-    }");
+    debugPrint("book Length : ${bookMarkdList.length}");
+    debugPrint("bookMark List Data: ${jsonEncode(bookMarkdList.toString())}");
   }
 }

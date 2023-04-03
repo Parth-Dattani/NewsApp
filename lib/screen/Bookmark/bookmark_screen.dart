@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/controller.dart';
 import 'package:news_app/screen/Home/widget/widget.dart';
-import 'package:share_plus/share_plus.dart';
-
 import '../../constant/constant.dart';
 import '../../widgets/widgets.dart';
 import '../screen.dart';
@@ -71,8 +68,7 @@ class BookMarkScreen extends GetView<BookMarkController> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            print("dfkdshf : ${controller.bookMarkdList[index].url.toString()}");
-                            print("bookMArk Image URl : ${
+                            debugPrint("bookMArk Image URl : ${
                             controller.bookMarkdList[index].multimedia != null ?
                             controller.bookMarkdList[index].multimedia![0].url
                                 .toString() : ''}");

@@ -15,7 +15,6 @@ class SplashController extends BaseController {
     super.onInit();
   }
 
-
   void checkLogin() async {
     debugPrint("hello ${await sharedPreferencesHelper.retrievePrefBoolData('isLogin')}");
     switch (

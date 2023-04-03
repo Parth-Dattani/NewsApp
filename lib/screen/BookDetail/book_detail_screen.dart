@@ -5,7 +5,6 @@ import 'package:news_app/controller/controller.dart';
 import 'package:news_app/widgets/common_loader.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../constant/constant.dart';
-import '../screen.dart';
 
 class BookDetailScreen extends GetView<BookDetailController>{
   static const pageId ="/BookDetailScreen";
@@ -109,34 +108,6 @@ class BookDetailScreen extends GetView<BookDetailController>{
                                         ),
                                         dataList("Author", controller.bookDetailsList[index].author.toString()),
                                         dataList("Price", controller.bookDetailsList[index].price.toString()),
-                                        // Expanded(
-                                        //   child: Row(
-                                        //     children: [
-                                        //       Text("Author : ", style: CustomTextStyle.appBarText,),
-                                        //       Expanded(
-                                        //         child: Text(
-                                        //           controller.bookDetailsList[index].author.toString(),
-                                        //           style: CustomTextStyle.labelStyle,
-                                        //           overflow: TextOverflow.clip,
-                                        //           maxLines: 1,                                        ),
-                                        //       ),
-                                        //      ],
-                                        //    ),
-                                        //  ),
-                                        // Expanded(
-                                        //   child: Row(
-                                        //     children: [
-                                        //       Text("Price : ", style: CustomTextStyle.appBarText,),
-                                        //       Expanded(
-                                        //         child: Text(
-                                        //           controller.bookDetailsList[index].price.toString(),
-                                        //           style: CustomTextStyle.labelStyle,
-                                        //           overflow: TextOverflow.clip,
-                                        //           maxLines: 1,                                        ),
-                                        //       ),
-                                        //     ],
-                                        //   ),
-                                        // ),
                                       ],
                                     ),
                                   ),
