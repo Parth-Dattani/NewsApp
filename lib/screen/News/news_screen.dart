@@ -22,7 +22,7 @@ class NewsScreen extends GetView<NewsController> {
             leadingOnTap: () {},
             leadingWidth: 150,
             iconSize: 4.5,
-            actionIcon: ImagePath.notificationIcon ,
+            actionIcon: ImagePath.notiIcon ,
           ),
           body: SafeArea(
             child: Padding(
@@ -39,8 +39,13 @@ class NewsScreen extends GetView<NewsController> {
                       ),
                       TextButton(
                         child: Text(
-                          "see_all".tr,
-                          style: CustomTextStyle.labelStyle,
+                            "see_all".tr,
+                            style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+                              fontFamily: AppTextStyle.poppinsRegular,
+                              fontSize: AppTextStyle.textFontSize14,
+                              fontWeight: FontWeight.w400,
+                              letterSpacing: AppTextStyle.letterSpacing,
+                            )
                         ),
                         onPressed: () {
                           //Get.toNamed(NewsScreen.pageId);
@@ -71,7 +76,12 @@ class NewsScreen extends GetView<NewsController> {
 
                               child: Text(
                                 controller.tabList[index],
-                                style: CustomTextStyle.newsHeadLineText,
+                                style:
+                                  Theme.of(context).textTheme.displaySmall!.copyWith(
+                                    fontFamily: AppTextStyle.poppinsRegular,
+                                    fontSize: AppTextStyle.textFontSize16,
+                                    fontWeight: FontWeight.w400,
+                                  )
                               ),
                             ))
 
