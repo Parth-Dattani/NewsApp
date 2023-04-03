@@ -39,7 +39,7 @@ class HomePageWidget extends StatelessWidget {
               controller: searchController,
               borderRadius: 6,
               hintText: "Search",
-              hintTextStyle: CustomTextStyle.hintTextStyle,
+            //  hintTextStyle: CustomTextStyle.hintTextStyle,
               prefixIcon: IconButton(
                   onPressed: () {},
                   icon: const Icon(
