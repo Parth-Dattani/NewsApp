@@ -50,7 +50,7 @@ class BookMarkScreen extends GetView<BookMarkController> {
                       color: ColorsConfig.colorGray,
                     )),
                 onChanged: (data) {
-                  //controller.searchTopic(data);
+                  controller.filterNews(data);
                 },
               ),
               const SizedBox(
@@ -61,7 +61,9 @@ class BookMarkScreen extends GetView<BookMarkController> {
               //       ?
               Expanded(
                 child: Obx(
-                  () => ListView.separated(
+                  () =>
+                  controller.searchList.isEmpty ?
+                      ListView.separated(
                       shrinkWrap: true,
                       itemCount: controller.bookMarkdList.length,
                       //physics: const NeverScrollableScrollPhysics(),
@@ -113,7 +115,62 @@ class BookMarkScreen extends GetView<BookMarkController> {
                       },
                       separatorBuilder: (BuildContext context, int index) {
                         return Container(height: 35.0);
-                      }),
+                      })
+                  :
+                  ListView.separated(
+                      shrinkWrap: true,
+                      itemCount: controller.searchList.length,
+                      //physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            debugPrint("bookMArk Image URl : ${
+                                controller.searchList[index].multimedia != null ?
+                                controller.searchList[index].multimedia![0].url
+                                    .toString() : ''}");
+                            Get.toNamed(DetailScreen.pageId,
+                                arguments: {
+                                  'section': controller.searchList[index].section.toString(),
+                                  'title': controller.searchList[index].title.toString(),
+                                  'byLine' : controller.searchList[index].orgFacet != null
+                                      ? controller.searchList[index].orgFacet!.first.toString()
+                                      : '',
+                                  'publishedDate': controller.searchList[index].publishedDate.toString(),
+                                  'image' :controller.searchList[index].multimedia != null ?
+                                  controller.searchList[index].multimedia![0].url
+                                      .toString() : '',
+                                  'abstract' :controller.searchList[index].abstract.toString()
+                                });
+
+                          },
+                          child: Obx(
+                                ()=> NewsListWidget(
+                              section: controller.searchList[index].section
+                                  .toString(),
+                              title:
+                              controller.searchList[index].title.toString(),
+                              byLine: controller.searchList[index].orgFacet !=
+                                  null
+                                  ? controller.searchList[index].orgFacet!.first
+                                  .toString()
+                                  : '',
+                              publishedDate: controller
+                                  .searchList[index].publishedDate
+                                  .toString(),
+                              newsLink:
+                              controller.searchList[index].url.toString(),
+                              image:
+                              controller.searchList[index].url != null
+                                  ? controller.searchList[index].url.toString()
+                                  : '',
+                            ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return Container(height: 35.0);
+                      })
+                  ,
                 ),
               )
               //       : const Center(child: CircularProgressIndicator()),

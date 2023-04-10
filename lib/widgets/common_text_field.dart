@@ -13,6 +13,8 @@ class CommonTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final FormFieldValidator<String>? validator;
   final bool? filled;
+  final int? maxLength;
+  final TextInputType keyboardType;
   final ValueChanged<String>? onChanged;
 
   const CommonTextField({
@@ -29,6 +31,8 @@ class CommonTextField extends StatelessWidget {
     this.filled = true,
     this.fillColors,
     this.onChanged,
+    this.maxLength,
+    this.keyboardType = TextInputType.text,
   }) : super(key: key);
 
   @override
@@ -36,12 +40,13 @@ class CommonTextField extends StatelessWidget {
     return  TextFormField(
       textDirection: TextDirection.ltr,
       controller: controller,
+      maxLength: maxLength,
+      keyboardType: keyboardType,
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         prefixIconColor: prefixIconColor,
         hintText: hintText,
         suffixIcon: suffixIcon,
-
         filled: filled,
         //fillColor: Theme.of(context).brightness == Brightness.dark ? ColorsConfig.colorLightGrey : ColorsConfig.colorTransfer,
         border: OutlineInputBorder(

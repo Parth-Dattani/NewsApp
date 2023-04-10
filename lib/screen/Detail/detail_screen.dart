@@ -216,16 +216,14 @@ class DetailScreen extends GetView<DetailController> {
 
                       // sharedPreferencesHelper.storePrefData("bookmark_news" , controller.title.value);
 
-
                     controller.retriveData();
-
                       controller.bookMarkdList.add(Results(
-                        section: controller.section.value,
-                        title: controller.title.value,
-                        byline: controller.byLine.value,
-                        publishedDate: controller.publishedDate.value,
-                        url: controller.image.value,
-                        abstract: controller.abstract.value,
+                        section: controller.section.value.toString(),
+                        title: controller.title.value.toString(),
+                        byline: controller.byLine.value.toString(),
+                        publishedDate: controller.publishedDate.value.toString(),
+                        url: controller.image.value.toString(),
+                        abstract: controller.abstract.value.toString(),
                       ));
 
                       sharedPreferencesHelper.storePrefData('bookmark_news', jsonEncode(controller.bookMarkdList));
