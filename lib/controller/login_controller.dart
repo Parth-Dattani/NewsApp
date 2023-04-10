@@ -23,6 +23,7 @@ class LoginController extends BaseController{
 
   void login(String email, String password) async {
     try {
+      loader.value = true;
       UserCredential user = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,

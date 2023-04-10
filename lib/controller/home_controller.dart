@@ -1,14 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_app/constant/constant.dart';
 import 'package:news_app/controller/base_controller.dart';
-import 'package:news_app/screen/Bookmark/bookmark_screen.dart';
-import 'package:news_app/screen/Detail/detail_screen.dart';
-import 'package:news_app/screen/Explore/explore_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../model/model.dart';
-import '../screen/screen.dart';
 import '../services/services.dart';
 import '../utils/utils.dart';
 
@@ -19,6 +13,7 @@ class HomeController extends BaseController{
   RxList<Results> resultDataList = <Results>[].obs;
   RxList<NewsResponse> newsResponse = <NewsResponse>[].obs;
   RxList<Results> bookMarkdList = <Results>[].obs;
+  RxList<Results> searchList = <Results>[].obs;
 
   @override
   void onInit() {
@@ -34,17 +29,17 @@ class HomeController extends BaseController{
 
 
   void bookMarkNews()async{
-    var result = await sharedPreferencesHelper.retrievePrefData("bookmark_news");
+    var result = await sharedPreferencesHelper.retrievePrefData('bookmark_news');
     var list = jsonDecode(result);
-    print("list : $list");
+    //print("list : $list");
     list.map((e) => bookMarkdList.add(Results.fromJson(e))).toList();
     print("book length : ${bookMarkdList.length}");
     print("bookMark : ${jsonEncode(bookMarkdList)}");
   }
 
-
-  void getNews() async {
-    // try {
+  void getNews() async  {
+    resultDataList.clear();
+    searchList.clear();
       loader.value = true;
       var response = await RemoteServices.getNews();
       if (response.statusCode == 200) {
@@ -52,7 +47,6 @@ class HomeController extends BaseController{
         var jsonData = json.decode(response.body);
           var data = jsonData['results'];
           if (data.isNotEmpty) {
-            //loader.value = false;
             for (var i in data) {
               resultDataList.add(Results.fromJson(i));
             }
@@ -61,17 +55,42 @@ class HomeController extends BaseController{
           } else {
             loader.value = false;
           }
+          searchList.addAll(resultDataList);
         }
-        // else {
-        //   loader.value = false;
-        // }
-      //}
-    // } catch (e) {
-    //
-    //   debugPrint("Error :- ${e.toString()}");
-    // }
   }
 
+ /* List<Results> searchNews(key) {
+    debugPrint("Check Search Key $key");
+
+    if (key.toString().isNotEmpty) {
+      resultDataList.value = resultDataList
+          .where((p0) => p0.title!.toLowerCase().contains(key.toLowerCase()))
+          .toList();
+
+      resultDataList.map((element) => debugPrint("search : ${element.title}")).toList();
+    } else {
+      //searchList.clear();
+      resultDataList.addAll(searchList);
+    }
+    return resultDataList;
+  }*/
+
+  void filterNews(key) {
+    var results = <Results>[];
+    if (key.isEmpty) {
+      results = resultDataList;
+    } else {
+      results = resultDataList
+          .where((element) => element.title
+          .toString()
+          .toLowerCase()
+          .contains(key.toLowerCase()))
+          .toList();
+
+      print('Result List : ${jsonEncode(results)}');
+    }
+    searchList.value = results;
+  }
 
 }
 

@@ -26,6 +26,7 @@ class Language extends Translations {
           'already_have_an_account' : 'Already have an account ?',
           'please_enter_email' : 'Please Enter Email',
           'please_enter_password' : 'Please Enter Password',
+          'phone_number_must_be_10_digit' : 'Phone Number Must Be 10 Digit',
           'select_your_country' : 'Select your Country',
           'Choose_your_topics' : 'Choose your Topics',
           'national' : 'National',

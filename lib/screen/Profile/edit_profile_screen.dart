@@ -110,7 +110,7 @@ class EditProfileScreen extends GetView<EditProfileController>{
                               controller: controller.userNameController,
                               prefixIcon: const Icon(Icons.person),
                               prefixIconColor: ColorsConfig.colorBlack,
-                              validator: Validator.isEmail,
+                              validator: Validator.isUserName,
                               hintText: 'username'.tr,
                               borderRadius: 10,
                             ),
@@ -140,6 +140,8 @@ class EditProfileScreen extends GetView<EditProfileController>{
                               validator: Validator.isPhone,
                               hintText: 'phone_number'.tr,
                               borderRadius: 10,
+                              maxLength: 10,
+                              keyboardType: TextInputType.phone,
                             ),
                             const SizedBox(height: 20,),
                             CommonTextField(

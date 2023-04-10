@@ -60,7 +60,7 @@ class ProfileController extends BaseController
         userId.value = data['uid'];
         userName.value = data['userName'].toString();
         bio.value = data["bio"] ?? '';
-       imageUrl.value = data['profile'];
+       imageUrl.value = data['profile'] ?? '';
 
       }
     }
