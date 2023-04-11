@@ -22,11 +22,14 @@ class BookMarkController extends BaseController {
 
   void bookMark() async {
     var result = await sharedPreferencesHelper.retrievePrefData('bookmark_news');
-    var list = jsonDecode(result);
-    list.map((e) => bookMarkdList.add(Results.fromJson(e))).toList();
-    debugPrint("book Length : ${bookMarkdList.length}");
-    debugPrint("bookMark List Data: ${jsonEncode(bookMarkdList.toString())}");
-    searchList.addAll(bookMarkdList);
+   if(result.isNotEmpty)
+     {
+       var list = jsonDecode(result);
+       list.map((e) => bookMarkdList.add(Results.fromJson(e))).toList();
+       debugPrint("book Length : ${bookMarkdList.length}");
+       debugPrint("bookMark List Data: ${jsonEncode(bookMarkdList.toString())}");
+       searchList.addAll(bookMarkdList);
+     }
   }
 
   void filterNews(key) {

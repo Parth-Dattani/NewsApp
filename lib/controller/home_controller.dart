@@ -18,7 +18,7 @@ class HomeController extends BaseController{
   @override
   void onInit() {
     getNews();
-    bookMarkNews();
+  //  bookMarkNews();
    super.onInit();
   }
 
@@ -30,6 +30,7 @@ class HomeController extends BaseController{
 
   void bookMarkNews()async{
     var result = await sharedPreferencesHelper.retrievePrefData('bookmark_news');
+    debugPrint("book mard list : $result");
     var list = jsonDecode(result);
     //print("list : $list");
     list.map((e) => bookMarkdList.add(Results.fromJson(e))).toList();
@@ -86,8 +87,6 @@ class HomeController extends BaseController{
           .toLowerCase()
           .contains(key.toLowerCase()))
           .toList();
-
-      print('Result List : ${jsonEncode(results)}');
     }
     searchList.value = results;
   }
