@@ -19,8 +19,7 @@ class BookMarkScreen extends GetView<BookMarkController> {
           return false;
         },
         child: Padding(
-          padding:
-              const EdgeInsets.only(left: 25, right: 25, top: 15, bottom: 16),
+          padding: const EdgeInsets.only(left: 25, right: 25, top: 15, bottom: 16),
           child: Column(
              crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -56,9 +55,6 @@ class BookMarkScreen extends GetView<BookMarkController> {
               const SizedBox(
                 height: 15,
               ),
-              // Obx(
-              //   () => controller.resultDataList.isNotEmpty
-              //       ?
               Expanded(
                 child: Obx(
                   () =>
@@ -173,8 +169,6 @@ class BookMarkScreen extends GetView<BookMarkController> {
                   ,
                 ),
               )
-              //       : const Center(child: CircularProgressIndicator()),
-              // )
             ],
           ),
         ),

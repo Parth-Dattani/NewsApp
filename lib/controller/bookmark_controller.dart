@@ -1,10 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/base_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../model/model.dart';
 import '../utils/utils.dart';
 
@@ -48,5 +45,4 @@ class BookMarkController extends BaseController {
     }
     searchList.value = results;
   }
-
 }
