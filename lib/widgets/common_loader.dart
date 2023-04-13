@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../constant/constant.dart';
 
@@ -18,11 +19,17 @@ class CommonLoader extends StatelessWidget {
             : const SizedBox(),
 
         isLoad ? const Center(
-          child: CircularProgressIndicator(
-            backgroundColor: ColorsConfig.colorRed,
-            strokeWidth: 5,
-            valueColor: AlwaysStoppedAnimation(ColorsConfig.colorLightBlue, ),
-          ),
+          child:
+          CupertinoActivityIndicator(
+            radius: 30,
+            animating: true,
+            color: ColorsConfig.colorRed,
+          )
+          // CircularProgressIndicator(
+          //   backgroundColor: ColorsConfig.colorRed,
+          //   strokeWidth: 5,
+          //   valueColor: AlwaysStoppedAnimation(ColorsConfig.colorLightBlue, ),
+          // ),
         ) :
         Container(),
       ],

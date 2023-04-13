@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/controller/controller.dart';
 import 'package:news_app/model/model.dart';
+import 'package:news_app/screen/Bookmark/bookmark_screen.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../constant/constant.dart';
 import '../../utils/shared_preferences_helper.dart';
@@ -213,10 +214,19 @@ class DetailScreen extends GetView<DetailController> {
                       debugPrint("isBookMark : ${controller.isBookMark.value}");
                       controller.isBookMark.value = !controller.isBookMark.value;
                       debugPrint("isBookMark : ${controller.isBookMark.value}");
-
-                      // sharedPreferencesHelper.storePrefData("bookmark_news" , controller.title.value);
-
-                    controller.retriveData();
+                      //controller.updateBookmarkStatus('bookmark_key', controller.isBookMark.value );
+                      /*if(controller.isBookMark.value){
+                        controller.bookmarked.add(controller.title.value);
+                        print("Add Book List : ${controller.bookmarked}");
+                        controller.bookmarked =  controller.bookmarked;
+                      }
+                      else{
+                        controller.bookmarked.remove(controller.title.value);
+                        print("remove Book List : ${controller.bookmarked}");
+                        controller.bookmarked =  controller.bookmarked;
+                      }
+                      print("Book List : ${controller.bookmarked}");*/
+                      //sharedPreferencesHelper.storeBoolPrefData('isLogin', true);
                       controller.bookMarkdList.add(Results(
                         section: controller.section.value.toString(),
                         title: controller.title.value.toString(),
@@ -227,8 +237,7 @@ class DetailScreen extends GetView<DetailController> {
                       ));
 
                       sharedPreferencesHelper.storePrefData('bookmark_news', jsonEncode(controller.bookMarkdList));
-                      //sharedPreferencesHelper.storePrefDataListResult('bookmark_news', controller.bookMarkdList.value);
-                      // sharedPreferencesHelper.storePrefDataList('Answers', [jsonEncode(controller.data())]);
+                      controller.bookMark();
                     },
                     icon: controller.isBookMark.value
                         ? const Icon(
@@ -237,7 +246,7 @@ class DetailScreen extends GetView<DetailController> {
                           )
                         : const Icon(Icons.bookmark_border_rounded)),
               ),
-              //Icon(Icons.bookmark, color: ColorsConfig.colorBlue,)
+
             ],
           ),
         ),
