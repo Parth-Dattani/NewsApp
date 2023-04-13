@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:news_app/constant/constant.dart';
 import 'package:news_app/controller/controller.dart';
 import 'package:news_app/screen/screen.dart';
-import 'package:news_app/utils/common.dart';
 import '../../widgets/widgets.dart';
 import 'widget/widget.dart';
 
@@ -41,9 +40,7 @@ class HomeScreen extends GetView<HomeController>{
           ),
           bottomNavigationBar :
           Obx(()=> bottomNavBar(tabIndex: controller.tabIndex.value,changeTabIndex: controller.changeTabIndex, context: context)),
-
         ),
-
       ),
     );
   }
@@ -64,8 +61,5 @@ class HomeScreen extends GetView<HomeController>{
         });
     return false;
   }
-
-
-
 }
 

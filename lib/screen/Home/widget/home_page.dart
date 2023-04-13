@@ -27,13 +27,11 @@ class HomePageWidget extends StatelessWidget {
         actionIconSize: 25,
         actionIcon: ImagePath.notiIcon,
         actionOnTap: (){
-          print("action tap 1");
         },
       ),
       body:  Padding(
         padding: const EdgeInsets.only(left: 25, right: 25, top: 40, bottom: 16),
         child: ListView(
-          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CommonTextField(
               controller: searchController,
@@ -213,10 +211,7 @@ class HomePageWidget extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            // Obx(
-            //   () => controller.resultDataList.isNotEmpty
-            //       ?
-                    ListView.separated(
+            ListView.separated(
                       shrinkWrap: true,
                       itemCount: 10,
                       physics: const BouncingScrollPhysics(),
@@ -259,8 +254,6 @@ class HomePageWidget extends StatelessWidget {
                       separatorBuilder: (BuildContext context, int index) {
                         return Container(height: 35.0);
                       })
-            //       : const Center(child: CircularProgressIndicator()),
-            // )
           ],
         ),
       ),
