@@ -13,7 +13,5 @@ mixin Apis {
   //newsCat
       //".json?api-key=[YOUR_API_KEY]";
 
-
-
   static const String acToken = 'token';
 }

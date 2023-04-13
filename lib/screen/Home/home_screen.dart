@@ -39,7 +39,7 @@ class HomeScreen extends GetView<HomeController>{
             ),
           ),
           bottomNavigationBar :
-          Obx(()=> bottomNavBar(tabIndex: controller.tabIndex.value,changeTabIndex: controller.changeTabIndex, context: context)),
+          Obx(()=> bottomNavBar(tabIndex: controller.tabIndex.value, changeTabIndex: controller.changeTabIndex, context: context)),
         ),
       ),
     );

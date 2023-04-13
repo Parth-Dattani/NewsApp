@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:news_app/constant/constant.dart';
 import 'package:news_app/controller/base_controller.dart';
 import '../model/model.dart';
 import '../services/services.dart';
@@ -31,11 +30,11 @@ class HomeController extends BaseController {
     var result = await sharedPreferencesHelper.retrievePrefData("bookmark_news");
     if (result.isNotEmpty) {
       var list = jsonDecode(result);
-      print("list : $list");
+      debugPrint("list : $list");
       bookMarkdList.clear();
       list.map((e) => bookMarkdList.add(Results.fromJson(e))).toList();
-      print("book length : ${bookMarkdList.length}");
-      print("bookMark : ${jsonEncode(bookMarkdList)}");
+      debugPrint("book length : ${bookMarkdList.length}");
+      debugPrint("bookMark : ${jsonEncode(bookMarkdList)}");
       bookMarkdList.refresh();
     }
   }
@@ -48,7 +47,6 @@ class HomeController extends BaseController {
       var jsonData = json.decode(response.body);
       var data = jsonData['results'];
       if (data.isNotEmpty) {
-        //loader.value = false;
         for (var i in data) {
           resultDataList.add(Results.fromJson(i));
         }
@@ -58,13 +56,6 @@ class HomeController extends BaseController {
         loader.value = false;
       }
     }
-    // else {
-    //   loader.value = false;
-    // }
-    //}
-    // } catch (e) {
-    //
-    //   debugPrint("Error :- ${e.toString()}");
-    // }
+    // } catch (e) {debugPrint("Error :- ${e.toString()}");}
   }
 }

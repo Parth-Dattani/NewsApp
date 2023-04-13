@@ -22,7 +22,7 @@ class SplashController extends BaseController {
       case true:
         return Get.offAndToNamed(HomeScreen.pageId);
       case false:
-        return Get.offAndToNamed(LoginScreen.pageId);
+        return Get.offAndToNamed(OnBoardScreen.pageId);
     }
   }
 }

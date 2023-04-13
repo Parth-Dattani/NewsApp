@@ -24,10 +24,19 @@ class EditProfileScreen extends GetView<EditProfileController>{
             leadingIcon: ImagePath.closeIcon,
             title: "edit_profile".tr,
             actionIcon: ImagePath.checkIcon,
-            actionOnTap: (){
-              controller.isEdit.value == true
-                  ? controller.updateProfile()
-                  : null;
+            actionOnTap: () async {
+                if(controller.pickedImage.value != null){
+                  controller.isEdit.value == true
+                      ? await controller.updateProfile()
+                      : null;
+                }
+                else{
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(const SnackBar(
+                      content: Text(
+                        "Please select a Profile",
+                      )));
+                }
             },
           ),
           body: SafeArea(child: SingleChildScrollView(
@@ -70,8 +79,17 @@ class EditProfileScreen extends GetView<EditProfileController>{
                                                 )
                                             :
 
-                                            Image.file(File(controller.pickedImage.value!.path),
-                                                fit: BoxFit.fill,height: Get.height * 0.19, width: Get.width * 0.30)
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  image: DecorationImage(
+                                                      image: FileImage(File(controller.pickedImage.value!.path)),
+                                                      fit: BoxFit.cover
+                                                  )
+                                              ),
+                                            )
+                                            // Image.file(File(controller.pickedImage.value!.path),
+                                            //     fit: BoxFit.fill,height: Get.height * 0.19, width: Get.width * 0.30)
                                      //     :
                                      //      controller.pickedImage.value != null
                                      // ? CachedNetworkImage(

@@ -34,9 +34,9 @@ class EditProfileController extends BaseController {
   RxString website = ''.obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
-    getData();
+    await getData();
     isEdit.value = Get.arguments['editProfile'];
   }
 
