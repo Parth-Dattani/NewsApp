@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/controller/controller.dart';
 import 'package:news_app/model/model.dart';
-import 'package:news_app/screen/Bookmark/bookmark_screen.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../constant/constant.dart';
 import '../../utils/shared_preferences_helper.dart';
