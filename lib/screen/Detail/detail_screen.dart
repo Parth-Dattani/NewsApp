@@ -29,14 +29,12 @@ class DetailScreen extends GetView<DetailController> {
           secondVisible: true,
           actionIcon2: ImagePath.moreIcon,
           actionIconSize2: 90,
-
           actionOnTap2: (){},
         ),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 25.0,),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
