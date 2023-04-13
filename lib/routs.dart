@@ -14,20 +14,20 @@ final List<GetPage> appPage = [
       binding: OnBoardBinding()),
   GetPage(
       name: LoginScreen.pageId,
-      page: () => LoginScreen(),
+      page: () => const LoginScreen(),
       binding: LoginBinding()),
 
   GetPage(name: SignUpScreen.pageId,
-      page: ()=>  SignUpScreen(),
+      page: ()=>  const SignUpScreen(),
   binding: SignUpBinding()),
 
   GetPage(
       name: CountryScreen.pageId,
-      page: () => CountryScreen(),
+      page: () => const CountryScreen(),
       binding: CountryBinding()),
   GetPage(
       name: TopicScreen.pageId,
-      page: () => TopicScreen(),
+      page: () => const TopicScreen(),
       binding: TopicBinding()),
 
   GetPage(
@@ -37,23 +37,23 @@ final List<GetPage> appPage = [
 
   GetPage(
       name: NewsScreen.pageId,
-      page: () =>  NewsScreen(),
+      page: () =>  const NewsScreen(),
       binding: NewsBinding()),
   GetPage(
       name: CongratulateScreen.pageId,
-      page: () =>  CongratulateScreen(),
+      page: () =>  const CongratulateScreen(),
       binding: CongratulateBinding()),
   GetPage(
       name: DetailScreen.pageId,
-      page: () =>  DetailScreen(),
+      page: () =>  const DetailScreen(),
       binding: DetailBinding()),
   GetPage(
       name: ExploreScreen.pageId,
-      page: () =>  ExploreScreen(),
+      page: () =>  const ExploreScreen(),
       binding: ExploreBinding()),
   GetPage(
       name: BookMarkScreen.pageId,
-      page: () =>   BookMarkScreen(),
+      page: () =>   const BookMarkScreen(),
       binding: BookMarkBinding()),
 
   GetPage(
@@ -66,6 +66,6 @@ final List<GetPage> appPage = [
       binding: BookDetailBinding()),
   GetPage(
       name: EditProfileScreen.pageId,
-      page: () =>  EditProfileScreen(),
+      page: () =>  const EditProfileScreen(),
       binding: EditProfileBinding()),
 ];
