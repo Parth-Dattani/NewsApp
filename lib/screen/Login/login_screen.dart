@@ -4,7 +4,6 @@ import 'package:news_app/constant/constant.dart';
 import 'package:news_app/controller/controller.dart';
 import 'package:news_app/widgets/common_loader.dart';
 import 'package:news_app/widgets/common_text_field.dart';
-
 import '../../utils/utils.dart';
 import '../../widgets/common_button.dart';
 import '../screen.dart';
@@ -18,8 +17,8 @@ class LoginScreen extends GetView<LoginController>{
     return Obx(
         ()=>
             CommonLoader(
-                isLoad: controller.loader.value,
-            body: Scaffold(
+              isLoad: controller.loader.value,
+              body: Scaffold(
               body: SafeArea(
                 child: SingleChildScrollView(
                   child: Padding(
@@ -44,7 +43,7 @@ class LoginScreen extends GetView<LoginController>{
                                     ],
                                   ),
                                   const SizedBox(height: 5,),
-                                 CommonTextField(controller: controller.emailController,
+                                  CommonTextField(controller: controller.emailController,
                                         validator: Validator.isEmail,
                                         borderRadius: 6,
                                         suffixIcon: IconButton(
@@ -70,19 +69,16 @@ class LoginScreen extends GetView<LoginController>{
                                   CommonTextField(controller: controller.passwordController,
                                       validator: Validator.isPassword,
                                       borderRadius: 6,
-                                      suffixIcon:
-                                      IconButton(
+                                      suffixIcon: IconButton(
                                         icon: controller.hidePassword.value ? const Icon(Icons.visibility_off)
                                             : const Icon(Icons.visibility),
                                         onPressed: () {
                                           controller.hidePassword.value = !controller.hidePassword.value;
                                         },
                                       ),
-                                      fillColors: controller.passFIllColor.value,
-                                      isObscure: controller.hidePassword.value,
-                                      /*IconButton(icon: Icon(Icons.remove_red_eye) ,onPressed: (){}),*/
+                                      //fillColors: controller.passFIllColor.value,
+                                      isObscure: controller.hidePassword.value, /*IconButton(icon: Icon(Icons.remove_red_eye) ,onPressed: (){}),*/
                                     ),
-
                                   const SizedBox(height: 10,),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -108,7 +104,7 @@ class LoginScreen extends GetView<LoginController>{
                                           ),
                                         ),
                                       ),
-                                          Container(
+                                          SizedBox(
                                             width: Get.width * 0.30,
                                               child: Text("remember_me".tr, style: CustomTextStyle.labelStyle,
                                           overflow: TextOverflow.ellipsis,maxLines: 2,)),
@@ -119,7 +115,7 @@ class LoginScreen extends GetView<LoginController>{
                                           textStyle: CustomTextStyle.forgotButton,
                                           minWidth: 80,
                                           onPress: (){
-                                            // Get.toNamed(ForgotPasswordScreen.pageId);
+                                             Get.toNamed(ForgotPasswordScreen.pageId);
                                           },
                                         ),
                                       ),
@@ -138,11 +134,12 @@ class LoginScreen extends GetView<LoginController>{
 
                                       if(controller.loginForm.currentState!.validate()){
                                         controller.login(controller.emailController.text, controller.passwordController.text);
+                                        controller.clearController();
                                       }
                                       else{
                                       debugPrint("inValid ${Validator.isEmail.toString()}");
                                       }
-                                      controller.clearController();
+
                                     },
                                   ),
                                 ],

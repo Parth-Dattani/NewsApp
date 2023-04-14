@@ -216,4 +216,12 @@ class CustomTextStyle {
     fontWeight: FontWeight.w700,
     letterSpacing: AppTextStyle.letterSpacing,
   );
+
+  static TextStyle radioTitleStyle = const TextStyle(
+      color: ColorsConfig.colorMixGray,
+      fontFamily: AppTextStyle.poppinsRegular,
+      fontSize: AppTextStyle.textFontSize14,
+      fontWeight: FontWeight.w400,
+      letterSpacing: AppTextStyle.letterSpacing
+  );
 }

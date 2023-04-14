@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:news_app/controller/controller.dart';
 
 class Validator {
-  static final controller = Get.find<BaseController>();
+  //static final controller = Get.find<BaseController>();
 
   static String emailString=r"^[a-zA-Z0-9_.\-]+@[a-zA-Z0-9_.\-]+\.[a-zA-Z]+";
 
@@ -51,7 +51,7 @@ class Validator {
 
   static String? isPassword(password) {
     if (password.toString().trim().isEmpty) {
-      controller.passFIllColor.value = true;
+      //controller.passFIllColor.value = true;
       return 'please_enter_password'.tr;
     }
     //controller.passFIllColor.value = false;

@@ -68,37 +68,34 @@ class BookDetailScreen extends GetView<BookDetailController>{
                                       errorWidget: (context, url, error) => const Icon(Icons.error, color: Colors.red,),
                                     ),
                                   ),
-                                  Container(
-                                    //height: Get.height*0.19,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          controller.bookDetailsList[index].title.toString(),
-                                          style:  Theme.of(context).textTheme.displayMedium!.copyWith(
-                                            fontFamily: AppTextStyle.poppinsRegular,
-                                            fontSize: AppTextStyle.textFontSize16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                          overflow: TextOverflow.visible,
-                                          maxLines: 1,
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        controller.bookDetailsList[index].title.toString(),
+                                        style:  Theme.of(context).textTheme.displayMedium!.copyWith(
+                                          fontFamily: AppTextStyle.poppinsRegular,
+                                          fontSize: AppTextStyle.textFontSize16,
+                                          fontWeight: FontWeight.w600,
                                         ),
-                                        Text(
-                                           controller.bookDetailsList[index].description.toString(),
-                                          style:  Theme.of(context).textTheme.displaySmall!.copyWith(
-                                            fontFamily: AppTextStyle.poppinsRegular,
-                                            fontSize: AppTextStyle.textFontSize14,
-                                            fontWeight: FontWeight.w400,
-                                            letterSpacing: AppTextStyle.letterSpacing,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 2,
+                                        overflow: TextOverflow.visible,
+                                        maxLines: 1,
+                                      ),
+                                      Text(
+                                         controller.bookDetailsList[index].description.toString(),
+                                        style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+                                          fontFamily: AppTextStyle.poppinsRegular,
+                                          fontSize: AppTextStyle.textFontSize14,
+                                          fontWeight: FontWeight.w400,
+                                          letterSpacing: AppTextStyle.letterSpacing,
                                         ),
-                                        dataList("Author", controller.bookDetailsList[index].author.toString(), context),
-                                        dataList("Price", controller.bookDetailsList[index].price.toString(), context),
-                                      ],
-                                    ),
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                      ),
+                                      dataList("Author", controller.bookDetailsList[index].author.toString(), context),
+                                      dataList("Price", controller.bookDetailsList[index].price.toString(), context),
+                                    ],
                                   ),
                                 ]),
                               );

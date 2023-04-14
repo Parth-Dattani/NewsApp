@@ -13,4 +13,6 @@ export 'Bookmark/bookmark_screen.dart';
 export 'Profile/profile_screen.dart';
 export 'BookDetail/book_detail_screen.dart';
 export 'Profile/edit_profile_screen.dart';
-export 'ForgotPassword/forgot_password.dart';
+export 'ForgotPassword/forgot_password_screen.dart';
+export 'ForgotPassword/email_otp_screen.dart';
+export 'ForgotPassword/mobile_otp_screen.dart';

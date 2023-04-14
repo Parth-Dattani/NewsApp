@@ -54,7 +54,7 @@ class SignUpScreen extends GetView<SignUpController>{
                                     ),
                                     const SizedBox(height: 5,),
                                     CommonTextField(controller: controller.passwordController,
-                                      validator: Validator.isEmail,
+                                      validator: Validator.isPassword,
                                       borderRadius: 6,
                                       //fillColors: controller.passFIllColor.value,
                                       suffixIcon:
@@ -103,11 +103,13 @@ class SignUpScreen extends GetView<SignUpController>{
                                       onPress: (){
                                         FocusScope.of(context).unfocus();
                                         if(controller.signUpFormKey.currentState!.validate()){
-                                          controller.signUp(controller.emailController.text, controller.passwordController.text);                                        }
+                                          controller.signUp(controller.emailController.text, controller.passwordController.text);
+                                          controller.clearController();
+                                        }
                                         else{
                                           debugPrint("inValid");
                                         }
-                                        controller.clearController();
+                                     
                                       },
                                     ),
                                   ],

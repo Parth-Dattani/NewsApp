@@ -1,4 +1,5 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:news_app/screen/ForgotPassword/email_otp_screen.dart';
 import 'binding/binding.dart';
 import 'screen/screen.dart';
 
@@ -68,4 +69,19 @@ final List<GetPage> appPage = [
       name: EditProfileScreen.pageId,
       page: () =>  const EditProfileScreen(),
       binding: EditProfileBinding()),
+
+  GetPage(
+      name: ForgotPasswordScreen.pageId,
+      page: () =>  const ForgotPasswordScreen(),
+      binding: ForgotPasswordBinding()),
+
+  GetPage(
+      name: EmailOtpScreen.pageId,
+      page: () =>  const EmailOtpScreen(),
+      binding: EmailOtpBinding()),
+
+  GetPage(
+      name: MobileOtpScreen.pageId,
+      page: () =>  MobileOtpScreen(),
+      binding: MobileOtpBinding()),
 ];

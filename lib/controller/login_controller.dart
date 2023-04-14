@@ -40,11 +40,12 @@ class LoginController extends BaseController{
       }
       Get.toNamed(CountryScreen.pageId);
     } on FirebaseAuthException catch (e) {
-
+      loader.value = false;
       Get.snackbar("Error", "$e", backgroundColor: ColorsConfig.colorLightRed,
         snackPosition: SnackPosition.BOTTOM,
         snackStyle: SnackStyle.FLOATING,
         duration: const Duration(seconds: 2),);
+
     }
   }
 

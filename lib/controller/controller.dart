@@ -15,3 +15,5 @@ export 'profile_controller.dart';
 export 'book_detail_controller.dart';
 export 'edit_profile_controller.dart';
 export 'forgot_password_controller.dart';
+export 'email_otp_controller.dart';
+export 'mobile_otp_controller.dart';

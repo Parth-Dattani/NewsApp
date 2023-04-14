@@ -25,6 +25,7 @@ class Language extends Translations {
           'signup_to_get_started' : 'Signup to get Started',
           'already_have_an_account' : 'Already have an account ?',
           'please_enter_email' : 'Please Enter Email',
+          'not_valid_email_address' : 'Not Valid Email Address',
           'please_enter_password' : 'Please Enter Password',
           'phone_number_must_be_10_digit' : 'Phone Number Must Be 10 Digit',
           'select_your_country' : 'Select your Country',
@@ -90,6 +91,8 @@ class Language extends Translations {
           "email_eddress*" : "Email Address*",
           "phone_number" : "Phone Number**",
           "bio" : "Bio",
+          "forgot" : "Forgot",
+          "submit" : "Submit",
         }
       };
 }
