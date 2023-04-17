@@ -68,21 +68,15 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController>{
             border: false,
             onPress: () {
               FocusScope.of(context).unfocus();
-              print("Chose Option : ${controller.selectedValue.value.toString()} ");
-              //controller.selectedValue.value == "Via Email:" ?
               Get.toNamed(EmailOtpScreen.pageId,
                   arguments: {
                     "option" : controller.selectedValue.value.toString(),
-                    // "isForgot": controller.isForgot.value = true,
-                    // "isPhone": controller.isPhone.value = false,
                   }
               );
-              //: Get.toNamed(MobileOtpScreen.pageId);
             },
           ),
         ),
       ),
     );
   }
-
 }

@@ -18,3 +18,12 @@ samples, guidance on mobile development, and a full API reference.
 
 ## parth@gmail.com 
 -- 123123
+
+
+
+NEWS APP
+https://www.figma.com/file/h2frYB7flQKo2SWIS2Fq5J/News-App-UI-Kit-(Community)?node-id=0-1&t=rK0nXzZQL6uLq4kn-0
+
+
+API's
+https://developer.nytimes.com/apis

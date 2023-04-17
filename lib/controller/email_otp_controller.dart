@@ -2,18 +2,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/base_controller.dart';
+import 'package:news_app/screen/ForgotPassword/mobile_otp_screen.dart';
 
 class EmailOtpController extends BaseController{
   //RxString selectedValue = "Via Email :".obs;
 
   final TextEditingController emailController = TextEditingController();
+  TextEditingController otpController = TextEditingController();
 
   RxBool isForgot = false.obs;
   RxBool isPhone = false.obs;
   RxString selectedOption = "".obs;
   RxBool otpVisibility = false.obs;
   RxString email = "".obs;
-  RxString selectedValue = "".obs;
+  //RxString selectedValue = "".obs;
   FirebaseAuth auth = FirebaseAuth.instance;
   RxString verificationID = "".obs;
 
@@ -41,6 +43,7 @@ class EmailOtpController extends BaseController{
   }
 
   void loginWithPhone() async {
+    Get.toNamed(MobileOtpScreen.pageId);
     auth.verifyPhoneNumber(
       phoneNumber: "+91${emailController.text}",
       verificationCompleted: (PhoneAuthCredential credential) async {

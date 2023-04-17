@@ -1,7 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/controller.dart';
+import 'package:news_app/screen/ForgotPassword/mobile_otp_screen.dart';
 import '../../constant/constant.dart';
 import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
@@ -10,7 +10,6 @@ class EmailOtpScreen extends GetView<EmailOtpController>{
   static const pageId = '/EmailOtpScreen';
 
   const EmailOtpScreen({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +30,13 @@ class EmailOtpScreen extends GetView<EmailOtpController>{
                   const SizedBox(height: 5,),
                   Text("Don’t worry! it happens. Please select the email or number associated with your account.", style: CustomTextStyle.accountTextStyle,),
                   const SizedBox(height: 15,),
-                  Text(controller.selectedValue.value.toString() == "Via SMS:" ? "Mobile number" : "Email ID"  , style: CustomTextStyle.labelStyle,),
+                  Text(controller.selectedOption.value.toString() == "Via SMS:" ? "Mobile number" : "Email ID"  , style: CustomTextStyle.labelStyle,),
                   const SizedBox(height: 5,),
                   Obx(()=>CommonTextField(controller: controller.emailController,
                       validator: Validator.isEmail,
-                      keyboardType: controller.selectedValue.value.toString() == "Via SMS:" ? TextInputType.number : TextInputType.text,
+                      keyboardType: controller.selectedOption.value.toString() == "Via SMS:" ? TextInputType.number : TextInputType.text,
                       borderRadius: 6,
-                      maxLength: controller.selectedValue.value.toString() == "Via SMS:" ? 10  : null,
+                      maxLength: controller.selectedOption.value.toString() == "Via SMS:" ? 10  : null,
                       suffixIcon: IconButton(
                         //icon: controller.errorSuffix.value ==  ? Icon(Icons.close) : Icons(Icons.abc),
                         icon: controller.emailFIllColor.value ? IconButton(icon: const Icon(Icons.close),onPressed: (){
@@ -85,16 +84,15 @@ class EmailOtpScreen extends GetView<EmailOtpController>{
             border: false,
             onPress: () async {
               FocusScope.of(context).unfocus();
-              print("Chose Option : ${controller.selectedValue.value.toString()} ");
-           //   controller.selectedValue.value == "Via SMS:" ?
-                  controller.loginWithPhone() ;
-              //:
-             //  await   controller.emailSend(context);
+              controller.selectedOption.value == "Via SMS:" ?
+                  Get.toNamed(MobileOtpScreen.pageId,
+                  arguments: {"mobile" : controller.emailController.text}
+                  ) :
+               await   controller.emailSend(context);
             },
           ),
         ),
       ),
     );
   }
-
 }

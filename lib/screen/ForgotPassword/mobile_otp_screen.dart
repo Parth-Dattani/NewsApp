@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/controller/controller.dart';
 import '../../constant/constant.dart';
-import '../../utils/utils.dart';
 import '../../widgets/widgets.dart';
 
 class MobileOtpScreen extends GetView<MobileOtpController>{
   static const pageId = '/MobileOtpScreen';
 
+  const MobileOtpScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Obx(
-          ()=> Scaffold(
+    return Scaffold(
         appBar: CommonAppBar(
           leadingIcon: ImagePath.arrowBack,
         ),
@@ -22,33 +22,23 @@ class MobileOtpScreen extends GetView<MobileOtpController>{
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("forgot".tr, style: CustomTextStyle.congratulateTextStyle,),
-                  Text("${"password".tr}?", style: CustomTextStyle.congratulateTextStyle,),
+                  Text("OTP Verification".tr, style: CustomTextStyle.congratulateTextStyle,textAlign: TextAlign.center),
                   const SizedBox(height: 5,),
-                  Text("Don’t worry! it happens. Please select the email or number associated with your account.", style: CustomTextStyle.accountTextStyle,),
+                  Text("Enter the OTP sent to +91 ${controller.phoneController.text}", style: CustomTextStyle.accountTextStyle,),
                   const SizedBox(height: 15,),
-                  Row(
-                    children: [
-                      Text('username'.tr, style: CustomTextStyle.labelStyle,),
-                      Text('*', style: CustomTextStyle.labelIconStyle,)
-                    ],
+              TextField(
+                    controller: controller.otpController,
+                    decoration: const InputDecoration(
+                      hintText: 'OTP',
+                      prefix: Padding(
+                        padding: EdgeInsets.all(4),
+                        child: Text(''),
+                      ),
+                    ),
+                    maxLength: 6,
+                    keyboardType: TextInputType.number,
                   ),
                   const SizedBox(height: 5,),
-                  CommonTextField(controller: controller.mobileController,
-                    validator: Validator.isEmail,
-                    borderRadius: 6,
-                    suffixIcon: IconButton(
-                      //icon: controller.errorSuffix.value ==  ? Icon(Icons.close) : Icons(Icons.abc),
-                      icon: controller.emailFIllColor.value ? IconButton(icon: const Icon(Icons.close),onPressed: (){
-                      },)
-                          : Container(),
-                      onPressed: (){},
-                    ),
-                    //fillColors: Validator.isEmail.toString() == 'please_enter_email'.tr ? true : false ,
-                    //fillColors: controller.emailFIllColor.value,
-                    // filled: Validator.isEmail.toString() == '' ? true : false,
-                  ),
-
                 ],
               ),
             ),
@@ -71,11 +61,11 @@ class MobileOtpScreen extends GetView<MobileOtpController>{
               FocusScope.of(context).unfocus();
               //print("Chose Option : ${controller.selectedValue.value} ");
               //Get.toNamed(HomeScreen.pageId);
+              controller.verifyOTP();
             },
           ),
         ),
-      ),
-    );
+      );
   }
 
 }
